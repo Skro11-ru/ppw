@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/temp" />
+      <excludeFolder url="file://$MODULE_DIR$/tmp" />
+      <excludePattern pattern="*.log" />
+      <excludePattern pattern="*.xml" />
+      <excludePattern pattern="*.txt" />
+      <excludePattern pattern="*.min.js" />
+      <excludePattern pattern="*.map.js" />
+      <excludePattern pattern="*.min.css" />
+      <excludePattern pattern="*.less" />
+      <excludePattern pattern="*.cab" />
+      <excludePattern pattern="*.jar" />
+      <excludePattern pattern="*.rar" />
+      <excludePattern pattern="*.zip" />
+      <excludePattern pattern="*.eot" />
+      <excludePattern pattern="*.ttf" />
+      <excludePattern pattern="*.svg" />
+      <excludePattern pattern="*.woff" />
+      <excludePattern pattern="*.woff2" />
+      <excludePattern pattern="*.png" />
+      <excludePattern pattern="*.gif" />
+      <excludePattern pattern="*.jpg" />
+      <excludePattern pattern="install" />
+      <excludePattern pattern="dest" />
+      <excludePattern pattern="dist" />
+      <excludePattern pattern="node_modules" />
+      <excludePattern pattern="*.yaml" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

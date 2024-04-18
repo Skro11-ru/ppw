@@ -1,0 +1,10 @@
+ #!/bin/sh
+npm run lint:all
+
+if [ $? -ne 0 ]; then
+  echo "Linting failed, commit denied!"
+  exit 1
+fi
+
+exit 0
+

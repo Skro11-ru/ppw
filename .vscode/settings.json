@@ -1,0 +1,15 @@
+{
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"astro",
+		"typescript",
+		"typescriptreact"
+	],
+	"css.customData": [".vscode/tailwind.json"],
+	"stylelint.validate": ["css", "html", "vue", "svelte", "astro"],
+	"prettier.documentSelectors": ["**/*.astro"],
+	"[astro]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
+}
