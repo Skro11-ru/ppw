@@ -1,0 +1,38 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+	links: {
+		link: string;
+		icon: string;
+		customClasses?: string[] | undefined;
+		title: string;
+	}[];
+}
+
+const { links } = Astro.props as Props;
+---
+
+<footer class="max-xs:px-10 flex justify-between border-t-2 px-20 py-5">
+	<p class="">
+		&copy; 2024 Anastasia Sudarchikova. <br />All Rights Reserved.
+	</p>
+	<ul>
+		{
+			links.map(({ link, icon, customClasses, title }) => {
+				return (
+					<li>
+						<a href={link} target="_blank" rel="noreferrer" title={title}>
+							<Icon
+								class="text-muted"
+								name={icon}
+								size={32}
+								class:list={[customClasses]}
+							/>
+						</a>
+					</li>
+				);
+			})
+		}
+	</ul>
+</footer>

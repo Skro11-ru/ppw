@@ -1,13 +1,18 @@
 ---
+import Navigation from '../components/widgets/nav/Navigation.astro';
+import Footer from '../components/widgets/footer/Footer.astro';
+import { socialLink } from '../../config/links/social';
+
 interface Props {
 	title: string;
+	width?: 'full';
 }
 
-const { title } = Astro.props;
+const { title, width } = Astro.props as Props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="motion-safe:scroll-smooth">
 	<head>
 		<meta charset="utf8" />
 		<meta name="description" content="Astro description" />
@@ -16,9 +21,16 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
-		<slot />
+	<body class="bg-stone-900 text-white">
+		<Navigation />
+		<div class="mx-auto" class:list={width === 'full' ? '' : 'max-w-screen-lg'}>
+			<slot />
+		</div>
+		<slot name="footer">
+			<Footer links={socialLink} />
+		</slot>
 	</body>
+	<script></script>
 </html>
 <style is:global>
 	:root {
@@ -34,13 +46,9 @@ const { title } = Astro.props;
 	}
 
 	html {
+		overflow-x: hidden;
 		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
-	}
-
-	code {
-		font-family: 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono',
-			'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace;
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizelegibility;
 	}
 </style>
