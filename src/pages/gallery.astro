@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AsyncGallery from '../components/gallery/AsyncGallery.astro';
+// import InternalGallery from '../components/gallery/InternalGallery.astro';
+---
+
+<Layout title="Gallery">
+	<div class="gal pb-1 text-white">
+		<!--<InternalGallery />-->
+		<AsyncGallery />
+	</div>
+</Layout>
+
+<script>
+	import PhotoSwipeLightbox from 'photoswipe/lightbox';
+	import 'photoswipe/style.css';
+
+	const lightbox = new PhotoSwipeLightbox({
+		bgOpacity: 0.9,
+		gallery: '.gal',
+		children: 'a',
+		pswpModule: () => import('photoswipe'),
+	});
+
+	lightbox.init();
+</script>
+
+<style lang="scss">
+	.gal {
+		display: grid;
+		grid-auto-rows: 250px;
+		grid-auto-flow: dense;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 10px;
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	:global(.v-stretch) {
+		@media (width >= 480px) {
+			grid-row: span 2;
+		}
+	}
+
+	:global(.h-stretch) {
+		@media (width >= 480px) {
+			grid-column: span 2;
+		}
+	}
+
+	:global(.big-stretch) {
+		@media (width >= 480px) {
+			grid-row: span 2;
+			grid-column: span 2;
+		}
+	}
+</style>

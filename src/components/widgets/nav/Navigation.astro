@@ -33,7 +33,7 @@ const currentPath = Astro.url.pathname;
 		data-nav-links
 	>
 		{
-			links.map((item) => (
+			Object.values(links).map((item) => (
 				<li
 					class:list={[
 						'hover:text-accent uppercase',

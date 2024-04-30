@@ -1,0 +1,155 @@
+---
+import { Image } from 'astro:assets';
+const enum PhotoSize {
+	S = 150,
+	M = 300,
+	L = 500,
+	XL = 800,
+	XXL = 1024,
+	XXXL = 1280,
+}
+
+const CURRENT_SIZE = PhotoSize.L;
+
+const token = import.meta.env.YANDEX_DISK_TOKEN;
+
+const response = await fetch(
+	`https://cloud-api.yandex.net/v1/disk/resources?path=disk%3A%2Ftest_ph&limit=100&preview_size=x${CURRENT_SIZE}`,
+
+	{
+		headers: {
+			Authorization: token,
+		},
+	},
+);
+const products = await response.json();
+
+const getSizes = (width: number, height: number, targetHeight: number) => {
+	const ratio = height / targetHeight;
+	const targetWidth = width / ratio;
+	return { width: Math.round(targetWidth), height: Math.round(targetHeight) };
+};
+
+export type ResponseType = {
+	antivirusStatus?: string;
+	size?: number;
+	commentIDS?: CommentIDS;
+	name?: string;
+	exif?: object;
+	created?: Date;
+	resourceID?: string;
+	modified?: Date;
+	mimeType?: string;
+	sizes?: Size[];
+	file?: string;
+	mediaType?: string;
+	preview?: string;
+	path?: string;
+	sha256?: string;
+	type?: string;
+	md5?: string;
+	revision?: number;
+};
+
+export type CommentIDS = {
+	privateResource?: string;
+	publicResource?: string;
+};
+
+export type Size = {
+	url?: string;
+	name?: string;
+};
+
+const result = products._embedded.items.map(
+	(
+		item: ResponseType,
+	): {
+		preview?: string;
+		file?: string;
+		size?: number;
+		sizes?: Size[];
+		name?: string;
+	} => {
+		return {
+			name: item.name,
+			size: item.size,
+			file: item.file,
+			preview: item.preview,
+			sizes: item.sizes,
+		};
+	},
+);
+---
+
+{
+	result.map(
+		async (
+			item: {
+				name: string;
+				size: string;
+				file: string;
+				preview: string;
+				sizes: string;
+			},
+			index: number,
+		) => {
+			const regex = /(\d+)\s*×\s*(\d+)/;
+			const matches = item.name.match(regex);
+			if (!matches) return undefined;
+			const originalWidth = +matches[1];
+			const originalHeight = +matches[2];
+
+			const { width, height } = getSizes(
+				originalWidth,
+				originalHeight,
+				CURRENT_SIZE,
+			);
+
+			const cssClassImage =
+				'h-full w-full transform rounded-lg object-cover transition-transform ' +
+				'duration-500 ease-[cubic-bezier(0.165,0.84,0.44,1)] hover:scale-105';
+			const sizesImage =
+				'(max-width: 360px) 240px, (max-width: 720px) 540px, ' +
+				'(max-width: 1600px) 720px, ' +
+				`${width}px`;
+
+			return (
+				<a
+					class="relative overflow-hidden"
+					class:list={[
+						{ 'v-stretch': index === 1 },
+						{ 'v-stretch': index === 5 },
+						{ 'v-stretch': index === 12 },
+						{ 'v-stretch': index === 15 },
+
+						{ 'h-stretch': index === 2 },
+						{ 'h-stretch': index === 8 },
+						{ 'h-stretch': index === 10 },
+						{ 'h-stretch': index === 18 },
+
+						{ 'big-stretch': index === 6 },
+						{ 'big-stretch': index === 16 },
+					]}
+					href={item.file}
+					data-pswp-width={width}
+					data-pswp-height={height}
+					data-cropped="true"
+				>
+					<Image
+						src={item.preview}
+						alt="A bird sitting on a nest of eggs."
+						width={width}
+						quality={10}
+						widths={[240, 540, 720, width]}
+						sizes={sizesImage}
+						decoding="async"
+						loading="lazy"
+						height={height}
+						class={cssClassImage}
+					/>
+				</a>
+			);
+		},
+	)
+}
