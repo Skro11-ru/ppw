@@ -23,7 +23,6 @@
       <excludePattern pattern="*.woff2" />
       <excludePattern pattern="*.png" />
       <excludePattern pattern="*.gif" />
-      <excludePattern pattern="*.jpg" />
       <excludePattern pattern="install" />
       <excludePattern pattern="dest" />
       <excludePattern pattern="dist" />

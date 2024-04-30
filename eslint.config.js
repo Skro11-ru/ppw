@@ -11,6 +11,7 @@ export default [
 	...eslintPluginAstro.configs['flat/recommended'],
 	{
 		rules: {
+			'@typescript-eslint/triple-slash-reference': 'off',
 			'no-console': [
 				'error',
 				{
@@ -27,8 +28,10 @@ export default [
 			'unicorn/filename-case': [
 				'error',
 				{
-					case: 'camelCase',
-					ignore: ['API'],
+					cases: {
+						camelCase: true,
+						pascalCase: true,
+					},
 				},
 			],
 			'unicorn/prevent-abbreviations': [
@@ -66,18 +69,6 @@ export default [
 			'unicorn/no-new-array': 'off',
 			'unicorn/no-useless-undefined': 'off',
 			'no-underscore-dangle': 'off',
-		},
-	},
-	{
-		files: ['**/*.astro'],
-		rules: {
-			'unicorn/filename-case': [
-				'error',
-				{
-					case: 'pascalCase',
-					ignore: [''],
-				},
-			],
 		},
 	},
 ];
