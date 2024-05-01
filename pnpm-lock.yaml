@@ -80,7 +80,7 @@ devDependencies:
     specifier: 52.0.0
     version: 52.0.0(eslint@8.55.0)
   netlify-cli:
-    specifier: ^17.23.1
+    specifier: 17.23.1
     version: 17.23.1(@types/node@20.12.7)
   postcss-html:
     specifier: 1.6.0
