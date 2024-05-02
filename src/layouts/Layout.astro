@@ -2,6 +2,8 @@
 import Navigation from '../components/widgets/nav/Navigation.astro';
 import Footer from '../components/widgets/footer/Footer.astro';
 import { socialLink } from '../../config/links/social';
+import { SEO } from 'astro-seo';
+import { config } from '../../config/config';
 
 interface Props {
 	title: string;
@@ -12,14 +14,34 @@ const { title, width } = Astro.props as Props;
 ---
 
 <!doctype html>
-<html lang="en" class="motion-safe:scroll-smooth">
+<html lang="ru" class="motion-safe:scroll-smooth">
 	<head>
-		<meta charset="utf8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<SEO
+			charset="utf8"
+			title={title || config.meta.title}
+			description={config.meta.description}
+			openGraph={{
+				basic: {
+					image: config.meta.image,
+					title: title || config.meta.title,
+					type: 'website',
+					url: Astro.url,
+				},
+			}}
+			extend={{
+				link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+				meta: [
+					{
+						name: 'viewport',
+						content: 'width=device-width, initial-scale=1.0',
+					},
+					{
+						name: 'keywords',
+						content: config.meta.keywords,
+					},
+				],
+			}}
+		/>
 	</head>
 	<body class="bg-stone-900 text-white">
 		<Navigation />
@@ -29,26 +51,26 @@ const { title, width } = Astro.props as Props;
 		<slot name="footer">
 			<Footer links={socialLink} />
 		</slot>
-	</body>
-	<script></script>
-</html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			#fff 60%
-		);
-	}
+		<script></script>
+		<style is:global>
+			:root {
+				--accent: 136, 58, 234;
+				--accent-light: 224, 204, 250;
+				--accent-dark: 49, 10, 101;
+				--accent-gradient: linear-gradient(
+					45deg,
+					rgb(var(--accent)),
+					rgb(var(--accent-light)) 30%,
+					#fff 60%
+				);
+			}
 
-	html {
-		overflow-x: hidden;
-		font-family: system-ui, sans-serif;
-		-webkit-font-smoothing: antialiased;
-		text-rendering: optimizelegibility;
-	}
-</style>
+			html {
+				overflow-x: hidden;
+				font-family: system-ui, sans-serif;
+				-webkit-font-smoothing: antialiased;
+				text-rendering: optimizelegibility;
+			}
+		</style>
+	</body>
+</html>

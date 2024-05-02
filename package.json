@@ -24,6 +24,7 @@
     "@iconify-json/mdi": "^1.1.66",
     "astro": "4.6.1",
     "astro-icon": "1.1.0",
+    "astro-seo": "^0.8.3",
     "photoswipe": "^5.4.3",
     "sharp": "0.33.3",
     "svelte": "4.2.15",

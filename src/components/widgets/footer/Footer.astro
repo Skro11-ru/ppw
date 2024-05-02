@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { config } from '../../../../config/config';
 
 interface Props {
 	links: {
@@ -15,7 +16,7 @@ const { links } = Astro.props as Props;
 
 <footer class="max-xs:px-10 flex justify-between border-t-[1px] px-20 py-5">
 	<p class="">
-		&copy; 2024 Anastasia Sudarchikova. <br />All Rights Reserved.
+		&copy; 2024 {config.name}. <br />Все права защищены.
 	</p>
 	<ul>
 		{

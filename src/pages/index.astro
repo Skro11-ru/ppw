@@ -3,19 +3,19 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import self from '../../public/photos/main/self.jpg';
 import { links } from '../components/widgets/nav/links';
+import { config } from '../../config/config';
 ---
 
-<Layout title="Welcome to Astro." width="full">
+<Layout title={config.meta.title} width="full">
 	<main class="flex h-[calc(100vh-var(--nav-height))] max-sm:relative">
 		<Image
 			src={self}
 			alt="A bird sitting on a nest of eggs."
 			width={self.width}
-			quality={30}
+			quality={40}
 			widths={[240, 540, 720, self.width]}
-			sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 1720px, ${self.width}px`}
-			decoding="async"
-			height={self.height}
+			sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${self.width}px`}
+			loading="eager"
 			class="w-1/2 flex-1 basis-1/2 object-cover object-top"
 		/>
 
@@ -27,7 +27,7 @@ import { links } from '../components/widgets/nav/links';
 			<h1 class="text-5xl font-bold">Привет, я Анастасия 👋</h1>
 			<p class="max-w-[500px]">
 				специализируюсь на мужском портрете, легко могу разрушить стереотип
-				"мужчины не любят фотографироваться". <br />Расскроем твою
+				"мужчины не любят фотографироваться". <br />Раскроем твою
 				индивидуальность?!
 			</p>
 		</div>

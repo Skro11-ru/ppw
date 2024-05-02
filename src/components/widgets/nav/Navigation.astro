@@ -46,7 +46,10 @@ const currentPath = Astro.url.pathname;
 		}
 	</ul>
 
-	<button class="hamburger xs:hidden group relative">
+	<button
+		class="hamburger xs:hidden group relative"
+		aria-label="hamburger-menu"
+	>
 		<div
 			class="relative flex h-[40px] w-[40px] transform items-center
 			justify-center rounded-full bg-slate-700 shadow-md ring-0 ring-gray-300

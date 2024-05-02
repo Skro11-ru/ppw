@@ -1,18 +1,18 @@
 export const links = {
 	home: {
-		title: 'Home',
+		title: 'Главная',
 		link: '/',
 	},
 	gallery: {
-		title: 'Gallery',
+		title: 'Портфолио',
 		link: '/gallery',
 	},
 	contact: {
-		title: 'Contact',
+		title: 'Контакты',
 		link: '/contact',
 	},
 	blog: {
-		title: 'Blog',
+		title: 'Блог',
 		link: '/blog',
 	},
 };
