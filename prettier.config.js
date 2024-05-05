@@ -2,7 +2,7 @@
 const config = {
 	arrowParens: 'always',
 	singleQuote: true,
-	printWidth: 20,
+	printWidth: 80,
 	bracketSpacing: true,
 	tabWidth: 2,
 	semi: true,

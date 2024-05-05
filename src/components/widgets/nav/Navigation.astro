@@ -1,119 +1,150 @@
 ---
-import { links } from './links';
-import logo from '../../../../public/logo.svg';
+import { navigation } from './navigation';
+// import logoLight from '../../../../public/logo--light.svg';
+import logoDark from '../../../../public/logo--dark.svg';
+import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 
 const currentPath = Astro.url.pathname;
 ---
 
-<nav
-	class="text-primary max-xs:px-10 max-xs:bg-stone-900/90
-	max-xs:drop-shadow-none sticky top-0 z-10 flex h-[80px]
-	flex-none items-center justify-between bg-stone-900/30
-	px-20 text-base max-sm:px-5 max-sm:text-sm sm:px-20"
->
-	<div class="flex items-center text-lg">
-		<Image src={logo} alt="logo" width={70} class="max-sm:w-[40px]" />
-		<div class="flex flex-col leading-none">
-			<p
-				class="text-3xl font-thin
+<!--===========-->
+<div class="flex items-center text-lg">
+	<Image src={logoDark} alt="logo" width={70} class="max-sm:w-[40px]" />
+	<div class="flex flex-col leading-none">
+		<p
+			class="text-3xl font-thin
 				leading-none max-sm:text-lg max-sm:leading-none"
-			>
-				<span class="font-medium"> SN</span>PRO
-			</p>
-			<p class="font-thin max-sm:text-sm max-sm:leading-none">photographer</p>
-		</div>
+		>
+			<span class="font-medium"> SN</span>PRO
+		</p>
+		<p class="font-thin max-sm:text-sm max-sm:leading-none">photographer</p>
 	</div>
-
+</div>
+<nav
+	data-nav-links
+	class="text-default hidden w-full items-center overflow-x-hidden
+	overflow-y-visible uppercase max-sm:absolute max-sm:bottom-0 max-sm:left-0
+	max-sm:right-0 max-sm:top-[80px] max-sm:flex max-sm:h-screen max-sm:w-full
+	max-sm:items-start max-sm:bg-page sm:flex sm:w-auto sm:justify-self-center
+	sm:overflow-x-auto sm:overflow-y-visible"
+	aria-label="Main navigation"
+>
 	<ul
-		class="max-xs:text-xl max-xs:gap-5 max-xs:py-5 max-xs:absolute
-		max-xs:top-[56px] max-xs:left-0 max-xs:right-0 max-xs:flex max-xs:flex-col
-		max-xs:justify-center max-xs:w-full max-xs:text-center max-xs:bg-stone-900/90
-		max-xs:px-20 flex gap-4 max-sm:gap-3"
-		data-nav-links
+		class="flex w-full flex-col text-xl font-medium tracking-[0.01rem] sm:w-auto
+		sm:flex-row sm:justify-center sm:self-center sm:text-[0.9375rem]"
 	>
 		{
-			Object.values(links).map((item) => (
-				<li
-					class:list={[
-						'hover:text-accent uppercase',
-						{ 'text-accent': item.link === currentPath },
-					]}
-				>
-					<a href={item.link}>{item.title}</a>
+			navigation.map(({ title, link, links }) => (
+				<li class={links?.length ? 'dropdown' : ''}>
+					{links?.length ? (
+						<>
+							<button
+								type="button"
+								class="hover:text-link flex items-center px-4 py-3 uppercase
+								dark:hover:text-white"
+							>
+								{title}{' '}
+								<Icon
+									name="mdi:chevron-down"
+									class="ml-0.5 hidden h-3.5 w-3.5 sm:inline rtl:ml-0 rtl:mr-0.5"
+								/>
+							</button>
+							<ul
+								class="dropdown-menu  rounded pl-4 font-medium text-inherit
+							bg-page sm:absolute sm:hidden  sm:min-w-[200px] sm:pl-0"
+							>
+								{links.map(({ title: text2, link: href2 }) => (
+									<li>
+										<a
+											class:list={[
+												'hover:text-link',
+												'whitespace-no-wrap',
+												'block',
+												'px-5',
+												'py-2',
+												'first:rounded-t last:rounded-b hover:text-accent',
+												{
+													'text-accent': link === currentPath,
+												},
+											]}
+											href={href2}
+										>
+											{text2}
+										</a>
+									</li>
+								))}
+							</ul>
+						</>
+					) : (
+						<a
+							class:list={[
+								'hover:text-link flex items-center px-4 py-3 dark:hover:text-white',
+								{
+									'text-accent': link === currentPath,
+								},
+							]}
+							href={link}
+						>
+							{title}
+						</a>
+					)}
 				</li>
 			))
 		}
 	</ul>
-
-	<button
-		class="hamburger xs:hidden group relative"
-		aria-label="hamburger-menu"
-	>
-		<div
-			class="relative flex h-[40px] w-[40px] transform items-center
-			justify-center rounded-full bg-slate-700 shadow-md ring-0 ring-gray-300
-			ring-opacity-30 transition-all duration-200 hover:ring-8 group-focus:ring-4"
-		>
-			<div
-				class="-container flex h-[20px] w-[20px] origin-center transform
-				flex-col justify-between transition-all duration-300"
-			>
-				<div
-					class="-first h-[2px] w-1/2 origin-right transform rounded bg-white
-					transition-all delay-75 duration-300 group-focus:h-[1px]
-					group-focus:-translate-y-[1px]"
-				>
-				</div>
-				<div class="-second h-[1px] rounded bg-white"></div>
-				<div
-					class="-third h-[2px] w-1/2 origin-left transform self-end rounded
-					bg-white transition-all delay-75 duration-300 group-focus:h-[1px]
-					group-focus:translate-y-[1px]"
-				>
-				</div>
-			</div>
-		</div>
-	</button>
-	<script>
-		const btn = document.querySelector('.hamburger');
-
-		if (btn) {
-			btn.addEventListener('click', () => {
-				const links = document.querySelector('[data-nav-links]');
-				if (!links) return;
-
-				links.classList.toggle('expanded');
-				btn.classList.toggle('--active');
-			});
-		}
-
-		window.addEventListener('load', function () {
-			scrollFunction();
-		});
-
-		window.addEventListener('scroll', () => {
-			scrollFunction();
-		});
-
-		function scrollFunction() {
-			const nav = document.querySelector('nav');
-			if (!nav) return;
-			if (document.documentElement.scrollTop > 0) {
-				nav.classList.add('top-nav-shadow');
-			}
-
-			if (document.documentElement.scrollTop === 0) {
-				nav.classList.remove('top-nav-shadow');
-			}
-		}
-	</script>
 </nav>
 
+<button
+	class="hamburger group relative max-sm:ml-auto sm:hidden"
+	aria-label="hamburger-menu"
+>
+	<div
+		class="relative flex h-[40px] w-[40px] transform items-center
+			justify-center rounded-full bg-accent
+			ring-opacity-30 transition-all duration-200 hover:ring-8 group-focus:ring-4"
+	>
+		<div
+			class="-container flex h-[20px] w-[20px] origin-center transform
+				flex-col justify-between transition-all duration-300"
+		>
+			<div
+				class="-first h-[2px] w-1/2 origin-right transform rounded bg-white
+					transition-all delay-75 duration-300 group-focus:h-[1px]
+					group-focus:-translate-y-[1px]"
+			>
+			</div>
+			<div class="-second h-[1px] rounded bg-white"></div>
+			<div
+				class="-third h-[2px] w-1/2 origin-left transform self-end rounded
+					bg-white transition-all delay-75 duration-300 group-focus:h-[1px]
+					group-focus:translate-y-[1px]"
+			>
+			</div>
+		</div>
+	</div>
+</button>
+<script>
+	const btn = document.querySelector('.hamburger');
+
+	if (btn) {
+		btn.addEventListener('click', () => {
+			const links = document.querySelector('[data-nav-links]');
+			if (!links) return;
+
+			links.classList.toggle('expanded');
+			btn.classList.toggle('--active');
+			document.documentElement.classList.toggle('overflow-hidden');
+
+			// header.classList.toggle('sticky');
+		});
+	}
+</script>
 <style lang="scss">
-	.top-nav-shadow {
-		@apply shadow-xl;
-		@apply backdrop-blur;
+	.dropdown:focus .dropdown-menu,
+	.dropdown:focus-within .dropdown-menu,
+	.dropdown:hover .dropdown-menu {
+		display: block;
 	}
 
 	.hamburger {
@@ -136,11 +167,13 @@ const currentPath = Astro.url.pathname;
 		display: flex;
 
 		&.expanded {
+			height: calc(100vh - 80px);
+
 			@apply flex;
 			@apply backdrop-blur;
 		}
 
-		@media (width <= 479px) {
+		@media (width <= 767px) {
 			@apply hidden;
 		}
 	}

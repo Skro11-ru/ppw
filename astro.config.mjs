@@ -9,7 +9,7 @@ export default defineConfig({
   integrations: [tailwind(), svelte(), icon({
     include: {
       // Include only three `mdi` icons in the bundle
-      mdi: ['instagram'],
+      mdi: ['instagram','chevron-down'],
       // Include all `uis` icons
       // uis: ['*']
     }

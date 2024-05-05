@@ -18,7 +18,13 @@ export default [
 					allow: ['info', 'error', 'clear', 'warn', 'table', 'time', 'timeEnd'],
 				},
 			],
-			'max-len': [2, 120],
+			'max-len': [
+				'off',
+				{
+					code: 120,
+					ignoreUrls: true,
+				},
+			],
 			'import/no-unresolved': 'off',
 			'import/no-extraneous-dependencies': 'off',
 			'unicorn/prefer-module': 'off',

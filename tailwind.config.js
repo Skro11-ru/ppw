@@ -27,8 +27,20 @@ export default {
 			},
 			variables: {
 				'height-navbar': '80px',
+				'bg-page': '#fff',
 			},
 		},
 	},
-	plugins: [],
+	plugins: [
+		/** @type {import('tailwindcss/types/config').PluginCreator} */
+		({ addUtilities }) => {
+			addUtilities({
+				'.bg-page': {
+					'background-color': 'var(--bg-color)',
+					color: 'var(--primary-color)',
+				},
+			});
+		},
+	],
+	darkMode: ['selector', '.dark'],
 };
