@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import self from '../../public/photos/main/self.jpg';
-import { links } from '../components/widgets/nav/links';
+import { navigation } from '../components/widgets/nav/navigation';
 import { config } from '../../config/config';
 ---
 
@@ -21,7 +21,7 @@ import { config } from '../../config/config';
 
 		<div
 			class="flex flex-1 basis-1/2 flex-col justify-center gap-7 text-balance
-			px-10 text-white max-sm:absolute max-sm:bottom-0 max-sm:left-0
+			px-10 max-sm:absolute max-sm:bottom-0 max-sm:left-0
 			max-sm:right-0 max-sm:top-[20%] max-sm:m-auto"
 		>
 			<h1 class="text-5xl font-bold">Привет, я Анастасия 👋</h1>
@@ -58,11 +58,11 @@ import { config } from '../../config/config';
 		</p>
 
 		<a
-			href={links.gallery.link}
-			class="rounded-4xl hover:text-accent m-auto flex
-			w-fit items-center bg-white px-10 py-5 text-black"
+			href={navigation.find((item) => item.id === 'gallery')?.links?.[0]?.link}
+			class="m-auto flex w-fit items-center
+			rounded-4xl bg-stone-900 px-10 py-5 text-white hover:text-accent dark:bg-white dark:text-black"
 		>
-			{links.gallery.title}
+			{navigation.find((item) => item.id === 'gallery')?.title}
 		</a>
 	</section>
 </Layout>

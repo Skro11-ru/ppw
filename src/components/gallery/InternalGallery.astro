@@ -2,15 +2,41 @@
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 
-const paths = import.meta.glob<{ default: ImageMetadata }>(
-	'../../../public/photos/gallery/*.{jpeg,jpg,png,gif}',
-);
+const { gallery } = Astro.params;
+
+let paths = {};
+
+if (gallery === 'all') {
+	paths = import.meta.glob<{ default: ImageMetadata }>(
+		'../../../public/photos/gallery/all/*.{jpeg,jpg,png,gif}',
+	);
+}
+
+if (gallery === 'man') {
+	paths = import.meta.glob<{ default: ImageMetadata }>(
+		'../../../public/photos/gallery/man/*.{jpeg,jpg,png,gif}',
+	);
+}
+
+if (gallery === 'woman') {
+	paths = import.meta.glob<{ default: ImageMetadata }>(
+		'../../../public/photos/gallery/woman/*.{jpeg,jpg,png,gif}',
+	);
+}
+
+if (gallery === 'family') {
+	paths = import.meta.glob<{ default: ImageMetadata }>(
+		'../../../public/photos/gallery/family/*.{jpeg,jpg,png,gif}',
+	);
+}
+
 const images = [];
 
 //todo https://docs.astro.build/en/recipes/dynamically-importing-images/
 for (const [, value] of Object.entries(paths)) {
-	const resolve = await value();
-
+	const resolve: { default: ImageMetadata } = await (
+		value as () => Promise<{ default: ImageMetadata }>
+	)();
 	images.push(resolve.default);
 }
 ---

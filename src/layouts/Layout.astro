@@ -4,6 +4,7 @@ import Footer from '../components/widgets/footer/Footer.astro';
 import { socialLink } from '../../config/links/social';
 import { SEO } from 'astro-seo';
 import { config } from '../../config/config';
+import ThemeIcon from '../components/ThemeIcon.astro';
 
 interface Props {
 	title: string;
@@ -11,6 +12,9 @@ interface Props {
 }
 
 const { title, width } = Astro.props as Props;
+
+import '../styles/index.scss';
+import '../styles/tailwind.css';
 ---
 
 <!doctype html>
@@ -43,33 +47,43 @@ const { title, width } = Astro.props as Props;
 			}}
 		/>
 	</head>
-	<body class="bg-stone-900 text-white">
-		<Navigation />
+	<body class="bg-white text-stone-900 dark:bg-stone-900 dark:text-white">
+		<header class="sticky top-0 z-10 flex h-[80px] justify-between px-5">
+			<Navigation />
+			<ThemeIcon />
+		</header>
+
 		<div class="mx-auto" class:list={width === 'full' ? '' : 'max-w-screen-lg'}>
 			<slot />
 		</div>
 		<slot name="footer">
 			<Footer links={socialLink} />
 		</slot>
-		<script></script>
-		<style is:global>
-			:root {
-				--accent: 136, 58, 234;
-				--accent-light: 224, 204, 250;
-				--accent-dark: 49, 10, 101;
-				--accent-gradient: linear-gradient(
-					45deg,
-					rgb(var(--accent)),
-					rgb(var(--accent-light)) 30%,
-					#fff 60%
-				);
-			}
+		<script>
+			window.addEventListener('load', function () {
+				scrollFunction();
+			});
 
-			html {
-				overflow-x: hidden;
-				font-family: system-ui, sans-serif;
-				-webkit-font-smoothing: antialiased;
-				text-rendering: optimizelegibility;
+			window.addEventListener('scroll', () => {
+				scrollFunction();
+			});
+
+			function scrollFunction() {
+				const nav = document.querySelector('header');
+				if (!nav) return;
+				if (document.documentElement.scrollTop > 0) {
+					nav.classList.add('top-nav-shadow');
+				}
+
+				if (document.documentElement.scrollTop === 0) {
+					nav.classList.remove('top-nav-shadow');
+				}
+			}
+		</script>
+		<style lang="scss">
+			.top-nav-shadow {
+				@apply shadow-xl;
+				@apply backdrop-blur;
 			}
 		</style>
 	</body>
