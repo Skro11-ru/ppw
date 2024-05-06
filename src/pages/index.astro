@@ -13,8 +13,8 @@ import { config } from '../../config/config';
 			alt="A bird sitting on a nest of eggs."
 			width={self.width}
 			quality={40}
-			widths={[240, 540, 720, self.width]}
-			sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${self.width}px`}
+			widths={[400, 768, 1024, self.width]}
+			sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, ${self.width}px"
 			loading="eager"
 			class="w-1/2 flex-1 basis-1/2 object-cover object-top"
 		/>

@@ -18,19 +18,23 @@ export const navigation = [
 				link: '/gallery/man',
 			},
 			{
+				title: 'Бизнес-портрет',
+				link: '/gallery/business',
+			},
+			{
 				title: 'Женский портрет',
 				link: '/gallery/woman',
 			},
 			{
-				title: 'Семейное фото',
-				link: '/gallery/family',
+				title: 'Разное',
+				link: '/gallery/other',
 			},
 		],
 	},
 	{
-		id: 'contact',
-		title: 'Контакты',
-		link: '/contact',
+		id: 'be',
+		title: 'Быть, а не казаться',
+		link: '/be',
 	},
 	{
 		id: 'blog',
@@ -57,8 +61,8 @@ export const navigation = [
 		link: '/prices',
 	},
 	{
-		id: 'reviews',
-		title: 'Отзывы',
-		link: '/reviews',
+		id: 'contact',
+		title: 'Контакты',
+		link: '/contact',
 	},
 ];

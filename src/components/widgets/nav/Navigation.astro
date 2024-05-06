@@ -24,7 +24,7 @@ const currentPath = Astro.url.pathname;
 	data-nav-links
 	class="text-default hidden w-full items-center overflow-x-hidden
 	overflow-y-visible uppercase max-sm:absolute max-sm:bottom-0 max-sm:left-0
-	max-sm:right-0 max-sm:top-[80px] max-sm:flex max-sm:h-screen max-sm:w-full
+	max-sm:right-0 max-sm:top-[80px] max-sm:h-screen max-sm:w-full
 	max-sm:items-start max-sm:bg-page sm:flex sm:w-auto sm:justify-self-center
 	sm:overflow-x-auto sm:overflow-y-visible"
 	aria-label="Main navigation"
@@ -40,7 +40,7 @@ const currentPath = Astro.url.pathname;
 						<>
 							<button
 								type="button"
-								class="hover:text-link flex items-center px-4 py-3 uppercase
+								class="flex items-center px-4 py-3 uppercase hover:text-accent
 								dark:hover:text-white"
 							>
 								{title}{' '}
@@ -78,7 +78,7 @@ const currentPath = Astro.url.pathname;
 					) : (
 						<a
 							class:list={[
-								'hover:text-link flex items-center px-4 py-3 dark:hover:text-white',
+								'flex items-center px-4 py-3 hover:text-accent ',
 								{
 									'text-accent': link === currentPath,
 								},
@@ -163,17 +163,11 @@ const currentPath = Astro.url.pathname;
 	}
 
 	[data-nav-links] {
-		display: flex;
-
 		&.expanded {
 			height: calc(100vh - 80px);
 
 			@apply flex;
 			@apply backdrop-blur;
-		}
-
-		@media (width <= 767px) {
-			@apply hidden;
 		}
 	}
 </style>

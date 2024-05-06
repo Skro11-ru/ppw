@@ -24,9 +24,15 @@ if (gallery === 'woman') {
 	);
 }
 
-if (gallery === 'family') {
+if (gallery === 'business') {
 	paths = import.meta.glob<{ default: ImageMetadata }>(
-		'../../../public/photos/gallery/family/*.{jpeg,jpg,png,gif}',
+		'../../../public/photos/gallery/business/*.{jpeg,jpg,png,gif}',
+	);
+}
+
+if (gallery === 'other') {
+	paths = import.meta.glob<{ default: ImageMetadata }>(
+		'../../../public/photos/gallery/other/*.{jpeg,jpg,png,gif}',
 	);
 }
 
