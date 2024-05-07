@@ -10,8 +10,8 @@ const config = {
 	trailingComma: 'all',
 	plugins: [
 		'prettier-plugin-astro',
-		'prettier-plugin-tailwindcss',
 		'prettier-plugin-svelte',
+		'prettier-plugin-tailwindcss',
 	],
 	overrides: [
 		{

@@ -53,7 +53,7 @@ import '../styles/tailwind.css';
 			<ThemeIcon />
 		</header>
 
-		<div class="mx-auto" class:list={width === 'full' ? '' : 'max-w-screen-lg'}>
+		<div class="mx-auto" class:list={[{ 'w-full': width === 'full' }, 'px-5']}>
 			<slot />
 		</div>
 		<slot name="footer">

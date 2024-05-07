@@ -56,9 +56,9 @@ export const navigation = [
 		],
 	},
 	{
-		id: 'prices',
+		id: 'tariffs',
 		title: 'Цены',
-		link: '/prices',
+		link: '/tariffs',
 	},
 	{
 		id: 'contact',

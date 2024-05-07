@@ -1,0 +1,29 @@
+---
+import TariffCard from './TariffCard.astro';
+interface Props {
+	tariffs: {
+		title: string;
+		price: number;
+		features: {
+			text: string;
+			included: boolean;
+		}[];
+	}[];
+}
+
+const { tariffs } = Astro.props as Props;
+---
+
+<ul class="flex flex-col gap-2">
+	{
+		tariffs.map((item) => (
+			<li>
+				<TariffCard
+					title={item.title}
+					price={item.price}
+					features={item.features}
+				/>
+			</li>
+		))
+	}
+</ul>

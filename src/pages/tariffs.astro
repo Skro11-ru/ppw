@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TariffList from '../components/tariffs/TariffList.astro';
+import { tariffs } from '../../config/tariffs';
+---
+
+<Layout title="Цены">
+	<h1 class="text-white">Цены</h1>
+	<TariffList tariffs={tariffs} />
+</Layout>

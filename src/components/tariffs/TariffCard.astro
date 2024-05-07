@@ -1,0 +1,54 @@
+---
+import { Icon } from 'astro-icon/components';
+interface Props {
+	title: string;
+	price: number;
+	features: {
+		text: string;
+		included: boolean;
+	}[];
+}
+
+const { title, features, price } = Astro.props as Props;
+---
+
+<div
+	class="grid grid-cols-[1fr_min-content_2fr] rounded-md border-2 border-accent max-sm:grid-cols-1"
+>
+	<div
+		class="flex basis-1/5 flex-col items-center justify-center border-r-2 border-accent bg-[#ffddd0] py-5 text-accent max-sm:border-r-0"
+	>
+		<div class="text-3xl uppercase">
+			{title}
+		</div>
+		<div class="text-2xl">
+			{price.toLocaleString('ru-RU')}&#8381;
+		</div>
+	</div>
+	<div
+		class="relative left-[-12px] m-auto h-[20px] w-[20px] rotate-45 border-2 border-accent border-b-[#ffddd0] border-l-[#ffddd0] bg-[#ffddd0] max-sm:hidden"
+	>
+	</div>
+
+	<ul
+		class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-x-10 py-5 max-sm:px-5"
+	>
+		{
+			features.map((feature) => (
+				<li
+					class="flex items-center gap-1 "
+					class:list={[{ 'line-through': !feature.included }]}
+				>
+					<span>
+						{feature.included ? (
+							<Icon name="mdi:check-circle-outline" class="text-green-500" />
+						) : (
+							<Icon name="mdi:close-circle-outline" class="text-red-500" />
+						)}
+					</span>
+					<span>{feature.text}</span>
+				</li>
+			))
+		}
+	</ul>
+</div>
