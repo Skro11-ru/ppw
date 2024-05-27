@@ -7,23 +7,23 @@ interface Props {
 		link: string;
 		icon: string;
 		customClasses?: string[] | undefined;
-		title: string;
+		label: string;
 	}[];
 }
 
 const { links } = Astro.props as Props;
 ---
 
-<footer class="max-xs:px-10 flex justify-between border-t-[1px] px-20 py-5">
+<footer class="flex justify-between border-t-[1px] px-20 py-5 max-xs:px-10">
 	<p class="">
 		&copy; 2024 {config.name}. <br />Все права защищены.
 	</p>
-	<ul>
+	<ul class="flex items-center gap-3">
 		{
-			links.map(({ link, icon, customClasses, title }) => {
+			links.map(({ link, icon, customClasses, label }) => {
 				return (
-					<li>
-						<a href={link} target="_blank" rel="noreferrer" title={title}>
+					<li class="hover:text-accent">
+						<a href={link} target="_blank" rel="noreferrer" title={label}>
 							<Icon
 								class="text-muted"
 								name={icon}

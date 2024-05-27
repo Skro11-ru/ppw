@@ -1,5 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components';
 interface Props {
 	title: string;
 	price: number;
@@ -31,21 +30,21 @@ const { title, features, price } = Astro.props as Props;
 	</div>
 
 	<ul
-		class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-x-10 py-5 max-sm:px-5"
+		class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-x-10 py-5 max-sm:px-6"
 	>
 		{
 			features.map((feature) => (
 				<li
 					class="flex items-center gap-1 "
-					class:list={[{ 'line-through': !feature.included }]}
+					class:list={[{ 'opacity-20': !feature.included }]}
 				>
-					<span>
-						{feature.included ? (
-							<Icon name="mdi:check-circle-outline" class="text-green-500" />
-						) : (
-							<Icon name="mdi:close-circle-outline" class="text-red-500" />
-						)}
-					</span>
+					<!--<span>-->
+					<!--	{feature.included ? (-->
+					<!--		<Icon name="mdi:check-circle-outline" class="text-green-500" />-->
+					<!--	) : (-->
+					<!--		<Icon name="mdi:close-circle-outline" class="text-red-500" />-->
+					<!--	)}-->
+					<!--</span>-->
 					<span>{feature.text}</span>
 				</li>
 			))
