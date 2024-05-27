@@ -10,10 +10,6 @@ export const navigation = [
 		link: '/gallery',
 		links: [
 			{
-				title: 'Все',
-				link: '/gallery/all',
-			},
-			{
 				title: 'Мужской портрет',
 				link: '/gallery/man',
 			},
@@ -29,32 +25,36 @@ export const navigation = [
 				title: 'Разное',
 				link: '/gallery/other',
 			},
+			{
+				title: 'Moto life',
+				link: '/gallery/moto',
+			},
 		],
 	},
 	{
 		id: 'be',
 		title: 'Быть, а не казаться',
-		link: '/be',
+		link: '/gallery/be',
 	},
-	{
-		id: 'blog',
-		title: 'Блог',
-		link: '/blog',
-		links: [
-			{
-				title: 'Ссылка 1',
-				link: '/1',
-			},
-			{
-				title: 'Ссылка 2',
-				link: '/2',
-			},
-			{
-				title: 'Ссылка 3',
-				link: '/3',
-			},
-		],
-	},
+	// {
+	// 	id: 'blog',
+	// 	title: 'Блог',
+	// 	link: '/blog',
+	// 	links: [
+	// 		{
+	// 			title: 'Ссылка 1',
+	// 			link: '/1',
+	// 		},
+	// 		{
+	// 			title: 'Ссылка 2',
+	// 			link: '/2',
+	// 		},
+	// 		{
+	// 			title: 'Ссылка 3',
+	// 			link: '/3',
+	// 		},
+	// 	],
+	// },
 	{
 		id: 'tariffs',
 		title: 'Цены',

@@ -6,49 +6,107 @@ const { gallery } = Astro.params;
 
 let paths = {};
 
-if (gallery === 'all') {
-	paths = import.meta.glob<{ default: ImageMetadata }>(
-		'../../../public/photos/gallery/all/*.{jpeg,jpg,png,gif}',
-	);
-}
+const data: {
+	images: ImageMetadata[];
+	setting: {
+		vertical: number[];
+		horizontal: number[];
+		big: number[];
+	};
+} = {
+	images: [],
+	setting: {
+		vertical: [],
+		horizontal: [],
+		big: [],
+	},
+};
 
 if (gallery === 'man') {
 	paths = import.meta.glob<{ default: ImageMetadata }>(
-		'../../../public/photos/gallery/man/*.{jpeg,jpg,png,gif}',
+		'../../../public/photos/gallery/man/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
 	);
+
+	data.setting = {
+		horizontal: [0, 8, 18],
+		vertical: [2, 5, 10, 12, 15],
+		big: [1, 8, 16],
+	};
 }
 
 if (gallery === 'woman') {
 	paths = import.meta.glob<{ default: ImageMetadata }>(
-		'../../../public/photos/gallery/woman/*.{jpeg,jpg,png,gif}',
+		'../../../public/photos/gallery/woman/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
 	);
+
+	data.setting = {
+		horizontal: [2, 8, 17],
+		vertical: [6, 10, 15],
+		big: [4, 5, 10],
+	};
 }
 
 if (gallery === 'business') {
 	paths = import.meta.glob<{ default: ImageMetadata }>(
-		'../../../public/photos/gallery/business/*.{jpeg,jpg,png,gif}',
+		'../../../public/photos/gallery/business/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
 	);
+
+	data.setting = {
+		horizontal: [8],
+		vertical: [2, 6, 10, 15],
+		big: [0, 5, 16],
+	};
+}
+
+if (gallery === 'moto') {
+	paths = import.meta.glob<{ default: ImageMetadata }>(
+		'../../../public/photos/gallery/moto/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
+	);
+
+	data.setting = {
+		horizontal: [2],
+		vertical: [],
+		big: [0],
+	};
 }
 
 if (gallery === 'other') {
 	paths = import.meta.glob<{ default: ImageMetadata }>(
-		'../../../public/photos/gallery/other/*.{jpeg,jpg,png,gif}',
+		'../../../public/photos/gallery/other/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
 	);
+
+	data.setting = {
+		horizontal: [17],
+		vertical: [0, 2, 3, 6, 8, 9, 10, 12, 13, 14, 15],
+		big: [1, 5, 7, 10],
+	};
 }
 
-const images = [];
+if (gallery === 'be') {
+	paths = import.meta.glob<{ default: ImageMetadata }>(
+		'../../../public/photos/gallery/be/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
+	);
+
+	data.setting = {
+		horizontal: [4],
+		vertical: [1, 3, 6, 7],
+		big: [0, 5],
+	};
+}
 
 //todo https://docs.astro.build/en/recipes/dynamically-importing-images/
 for (const [, value] of Object.entries(paths)) {
 	const resolve: { default: ImageMetadata } = await (
 		value as () => Promise<{ default: ImageMetadata }>
 	)();
-	images.push(resolve.default);
+	data.images.push(resolve.default);
 }
+
+const isDev = import.meta.env.MODE === 'development';
 ---
 
 {
-	images.map((item, index) => {
+	data.images.map((item, index) => {
 		const { width, height, src /*, format*/ } = item;
 		const cssClassImage =
 			'h-full w-full transform rounded-lg object-cover transition-transform ' +
@@ -56,20 +114,11 @@ for (const [, value] of Object.entries(paths)) {
 		const sizesImage = `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${width}px`;
 		return (
 			<a
-				class="relative overflow-hidden"
+				class="relative overflow-hidden grayscale hover:grayscale-0"
 				class:list={[
-					{ 'v-stretch': index === 1 },
-					{ 'v-stretch': index === 5 },
-					{ 'v-stretch': index === 12 },
-					{ 'v-stretch': index === 15 },
-
-					{ 'h-stretch': index === 2 },
-					{ 'h-stretch': index === 8 },
-					{ 'h-stretch': index === 10 },
-					{ 'h-stretch': index === 18 },
-
-					{ 'big-stretch': index === 6 },
-					{ 'big-stretch': index === 16 },
+					{ 'v-stretch': data.setting.vertical.includes(index) },
+					{ 'h-stretch': data.setting.horizontal.includes(index) },
+					{ 'big-stretch': data.setting.big.includes(index) },
 				]}
 				href={src}
 				data-pswp-width={width}
@@ -80,13 +129,19 @@ for (const [, value] of Object.entries(paths)) {
 					src={item}
 					alt="A bird sitting on a nest of eggs."
 					width={width}
-					quality={10}
+					quality={90}
 					widths={[240, 540, 720, width]}
 					sizes={sizesImage}
 					decoding="async"
 					loading="lazy"
 					class={cssClassImage}
 				/>
+
+				{() => {
+					if (isDev) {
+						return <span class="absolute left-0 top-0"> {index} </span>;
+					}
+				}}
 			</a>
 		);
 	})
