@@ -15,22 +15,22 @@ const { title, features, price } = Astro.props as Props;
 	class="grid grid-cols-[1fr_min-content_2fr] rounded-md border-2 border-accent max-sm:grid-cols-1"
 >
 	<div
-		class="flex basis-1/5 flex-col items-center justify-center border-r-2 border-accent bg-[#ffddd0] py-5 text-accent max-sm:border-r-0"
+		class="flex basis-1/5 flex-col items-center justify-center border-r-2 border-accent bg-secondary py-5  max-sm:border-r-0 dark:bg-white"
 	>
-		<div class="text-3xl uppercase">
+		<div class="text-3xl uppercase text-white dark:text-secondary">
 			{title}
 		</div>
-		<div class="text-2xl">
+		<div class="text-2xl text-accent">
 			{price.toLocaleString('ru-RU')}&#8381;
 		</div>
 	</div>
 	<div
-		class="relative left-[-12px] m-auto h-[20px] w-[20px] rotate-45 border-2 border-accent border-b-[#ffddd0] border-l-[#ffddd0] bg-[#ffddd0] max-sm:hidden"
+		class="relative left-[-12px] m-auto h-[20px] w-[20px] rotate-45 border-2 border-accent dark:border-b-white dark:border-l-white dark:bg-white max-sm:hidden border-b-secondary border-l-secondary bg-secondary"
 	>
 	</div>
 
 	<ul
-		class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-x-10 py-5 max-sm:px-6"
+		class="flex flex-col flex-wrap max-h-[220px] gap-x-10 py-5 max-sm:px-6 max-lg:flex-nowrap max-lg:max-h-none max-"
 	>
 		{
 			features.map((feature) => (

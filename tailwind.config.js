@@ -20,10 +20,11 @@ export default {
 			colors: {
 				primary: '#fff',
 				accent: '#F74808',
+				secondary: '#1d1d1b',
 			},
 			fontFamily: {
-				sans: ['Graphik', 'sans-serif'],
-				serif: ['Merriweather', 'serif'],
+				montserrat: ['Montserrat', 'sans-serif'],
+				muller: ['Muller-Trial', 'sans-serif'],
 			},
 			variables: {
 				'height-navbar': '80px',

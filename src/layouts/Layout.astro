@@ -15,9 +15,9 @@ interface Props {
 const { title, width } = Astro.props as Props;
 const currentPath = Astro.url.pathname;
 
-import '../styles/normalize/normalize.css';
-import '../styles/index.scss';
-import '../styles/tailwind.css';
+import '../assets/styles/normalize/normalize.css';
+import '../assets/styles/index.scss';
+import '../assets/styles/tailwind.css';
 ---
 
 <!doctype html>
@@ -49,8 +49,91 @@ import '../styles/tailwind.css';
 				],
 			}}
 		/>
+
+		<link
+			rel="preload"
+			href="/fonts/Montserrat-Light.woff"
+			as="font"
+			type="font/woff"
+			crossorigin
+		/>
+
+		<link
+			rel="preload"
+			href="/fonts/Montserrat-Light.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+
+		<link
+			rel="preload"
+			href="/fonts/Montserrat-Regular.woff"
+			as="font"
+			type="font/woff"
+			crossorigin
+		/>
+
+		<link
+			rel="preload"
+			href="/fonts/Montserrat-Regular.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+
+		<link
+			rel="preload"
+			href="/fonts/Muller-Trial-ExtraBold.woff"
+			as="font"
+			type="font/woff"
+			crossorigin
+		/>
+
+		<link
+			rel="preload"
+			href="/fonts/Muller-Trial-ExtraBold.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+
+		<link
+			rel="preload"
+			href="/fonts/Muller-Trial-Regular.woff"
+			as="font"
+			type="font/woff"
+			crossorigin
+		/>
+
+		<link
+			rel="preload"
+			href="/fonts/Muller-Trial-Regular.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+
+		<link
+			rel="preload"
+			href="/fonts/Muller-Trial-Thin.woff"
+			as="font"
+			type="font/woff"
+			crossorigin
+		/>
+
+		<link
+			rel="preload"
+			href="/fonts/Muller-Trial-Thin.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
 	</head>
-	<body class="bg-white text-stone-900 dark:bg-stone-900 dark:text-white">
+
+	<body
+		class="font-muller dark:bg-secondary text-secondary bg-white text-lg font-medium dark:text-white"
+	>
 		<header class="sticky top-0 z-20 flex h-[80px] justify-between gap-3 px-6">
 			<Navigation />
 			<ThemeIcon />
@@ -61,6 +144,7 @@ import '../styles/tailwind.css';
 			class:list={[
 				{ '!max-w-full': width === 'full' },
 				{ 'px-6': currentPath !== '/' },
+				{ 'py-16': currentPath !== '/' },
 			]}
 		>
 			<!--      display: flex;-->

@@ -2,12 +2,17 @@
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 
+interface ExtendedImageMetadata extends ImageMetadata {
+	index: number;
+	// ...
+}
+
 const { gallery } = Astro.params;
 
 let paths = {};
 
 const data: {
-	images: ImageMetadata[];
+	images: ExtendedImageMetadata[];
 	setting: {
 		vertical: number[];
 		horizontal: number[];
@@ -23,43 +28,43 @@ const data: {
 };
 
 if (gallery === 'man') {
-	paths = import.meta.glob<{ default: ImageMetadata }>(
+	paths = import.meta.glob<{ default: ExtendedImageMetadata }>(
 		'../../../public/photos/gallery/man/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
 	);
 
 	data.setting = {
-		horizontal: [0, 8, 18],
+		horizontal: [1, 8, 18],
 		vertical: [2, 5, 10, 12, 15],
-		big: [1, 8, 16],
+		big: [0, 8, 16],
 	};
 }
 
 if (gallery === 'woman') {
-	paths = import.meta.glob<{ default: ImageMetadata }>(
+	paths = import.meta.glob<{ default: ExtendedImageMetadata }>(
 		'../../../public/photos/gallery/woman/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
 	);
 
 	data.setting = {
-		horizontal: [2, 8, 17],
-		vertical: [6, 10, 15],
-		big: [4, 5, 10],
+		horizontal: [0, 21],
+		vertical: [1, 7, 9, 10, 15],
+		big: [2, 5, 10, 17],
 	};
 }
 
 if (gallery === 'business') {
-	paths = import.meta.glob<{ default: ImageMetadata }>(
+	paths = import.meta.glob<{ default: ExtendedImageMetadata }>(
 		'../../../public/photos/gallery/business/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
 	);
 
 	data.setting = {
-		horizontal: [8],
-		vertical: [2, 6, 10, 15],
-		big: [0, 5, 16],
+		horizontal: [0],
+		vertical: [3, 6, 15],
+		big: [2, 5, 16],
 	};
 }
 
 if (gallery === 'moto') {
-	paths = import.meta.glob<{ default: ImageMetadata }>(
+	paths = import.meta.glob<{ default: ExtendedImageMetadata }>(
 		'../../../public/photos/gallery/moto/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
 	);
 
@@ -71,43 +76,57 @@ if (gallery === 'moto') {
 }
 
 if (gallery === 'other') {
-	paths = import.meta.glob<{ default: ImageMetadata }>(
+	paths = import.meta.glob<{ default: ExtendedImageMetadata }>(
 		'../../../public/photos/gallery/other/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
 	);
 
 	data.setting = {
-		horizontal: [17],
-		vertical: [0, 2, 3, 6, 8, 9, 10, 12, 13, 14, 15],
-		big: [1, 5, 7, 10],
+		horizontal: [9, 17],
+		vertical: [0, 4, 5, 11, 12, 13, 14, 15],
+		big: [1, 7, 10],
 	};
 }
 
-if (gallery === 'be') {
-	paths = import.meta.glob<{ default: ImageMetadata }>(
-		'../../../public/photos/gallery/be/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
+const currentPath = Astro.url.pathname;
+
+if (currentPath.includes('achievements')) {
+	paths = import.meta.glob<{ default: ExtendedImageMetadata }>(
+		'../../../public/photos/achievements/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
 	);
 
 	data.setting = {
-		horizontal: [4],
-		vertical: [1, 3, 6, 7],
-		big: [0, 5],
+		horizontal: [],
+		vertical: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+		big: [],
 	};
 }
 
 //todo https://docs.astro.build/en/recipes/dynamically-importing-images/
 for (const [, value] of Object.entries(paths)) {
-	const resolve: { default: ImageMetadata } = await (
-		value as () => Promise<{ default: ImageMetadata }>
+	const resolve: { default: ExtendedImageMetadata } = await (
+		value as () => Promise<{ default: ExtendedImageMetadata }>
 	)();
-	data.images.push(resolve.default);
+	const index: string | undefined = resolve.default.src
+		?.split('/')
+		?.at(-1)
+		?.split('.')?.[0];
+
+	const img = resolve.default;
+
+	if (index !== undefined) {
+		img['index'] = Number(index);
+	}
+	data.images.push(img);
+
+	data.images = data.images.sort((a, b) => a.index - b.index);
 }
 
 const isDev = import.meta.env.MODE === 'development';
 ---
 
 {
-	data.images.map((item, index) => {
-		const { width, height, src /*, format*/ } = item;
+	data.images.map((item, index_) => {
+		const { width, height, src /*index , format*/ } = item;
 		const cssClassImage =
 			'h-full w-full transform rounded-lg object-cover transition-transform ' +
 			'duration-500 ease-[cubic-bezier(0.165,0.84,0.44,1)] hover:scale-105';
@@ -115,10 +134,11 @@ const isDev = import.meta.env.MODE === 'development';
 		return (
 			<a
 				class="relative overflow-hidden grayscale hover:grayscale-0"
+				style={`order: ${index_}`}
 				class:list={[
-					{ 'v-stretch': data.setting.vertical.includes(index) },
-					{ 'h-stretch': data.setting.horizontal.includes(index) },
-					{ 'big-stretch': data.setting.big.includes(index) },
+					{ 'v-stretch': data.setting.vertical.includes(index_) },
+					{ 'h-stretch': data.setting.horizontal.includes(index_) },
+					{ 'big-stretch': data.setting.big.includes(index_) },
 				]}
 				href={src}
 				data-pswp-width={width}
@@ -139,7 +159,7 @@ const isDev = import.meta.env.MODE === 'development';
 
 				{() => {
 					if (isDev) {
-						return <span class="absolute left-0 top-0"> {index} </span>;
+						return <span class="absolute left-0 top-0"> {index_} </span>;
 					}
 				}}
 			</a>

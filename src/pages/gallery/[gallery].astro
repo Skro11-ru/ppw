@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import InternalGallery from '../../components/gallery/InternalGallery.astro';
 
 export function getStaticPaths() {
-	let galleries = ['man', 'business', 'woman', 'other', 'moto', 'be'];
+	let galleries = ['man', 'business', 'woman', 'other', 'moto'];
 	return galleries.map((gallery) => {
 		return {
 			params: {
@@ -47,24 +47,40 @@ const { gallery } = Astro.params;
 		gap: 10px;
 		width: 100%;
 		margin: 0 auto;
-	}
 
-	:global(.v-stretch) {
-		@media (width >= 480px) {
-			grid-row: span 2;
+		:global(img) {
+			object-position: 50% 20%;
 		}
-	}
 
-	:global(.h-stretch) {
-		@media (width >= 480px) {
-			grid-column: span 2;
+		:global(.v-stretch) {
+			:global(img) {
+				object-position: 50% 50%;
+			}
+
+			@media (width >= 480px) {
+				grid-row: span 2;
+			}
 		}
-	}
 
-	:global(.big-stretch) {
-		@media (width >= 480px) {
-			grid-row: span 2;
-			grid-column: span 2;
+		:global(.h-stretch) {
+			:global(img) {
+				object-position: 50% 30%;
+			}
+
+			@media (width >= 480px) {
+				grid-column: span 2;
+			}
+		}
+
+		:global(.big-stretch) {
+			:global(img) {
+				object-position: 50% 40%;
+			}
+
+			@media (width >= 480px) {
+				grid-row: span 2;
+				grid-column: span 2;
+			}
 		}
 	}
 </style>

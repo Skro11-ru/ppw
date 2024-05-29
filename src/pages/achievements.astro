@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import InternalGallery from '../components/gallery/InternalGallery.astro';
+---
+
+<Layout title="Достижения">
+	<div class="gal max pb-1 text-white max-sm:justify-center">
+		<InternalGallery />
+	</div>
+</Layout>
+
+<script>
+	import PhotoSwipeLightbox from 'photoswipe/lightbox';
+	import 'photoswipe/style.css';
+
+	const lightbox = new PhotoSwipeLightbox({
+		bgOpacity: 0.9,
+		gallery: '.gal',
+		children: 'a',
+		pswpModule: () => import('photoswipe'),
+	});
+
+	lightbox.init();
+</script>
+
+<style lang="scss">
+	.gal {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 20%));
+		gap: 10px;
+		width: 100%;
+		margin: 0 auto;
+	}
+</style>
