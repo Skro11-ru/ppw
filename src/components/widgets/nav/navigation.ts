@@ -32,9 +32,9 @@ export const navigation = [
 		],
 	},
 	{
-		id: 'be',
-		title: 'Быть, а не казаться',
-		link: '/gallery/be',
+		id: 'achievements',
+		title: 'Достижения',
+		link: '/achievements',
 	},
 	// {
 	// 	id: 'blog',
@@ -57,7 +57,7 @@ export const navigation = [
 	// },
 	{
 		id: 'tariffs',
-		title: 'Цены',
+		title: 'Стоимость',
 		link: '/tariffs',
 	},
 	{

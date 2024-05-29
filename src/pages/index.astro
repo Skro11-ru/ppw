@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import self from '../../public/photos/main/self.jpg';
-import { navigation } from '../components/widgets/nav/navigation';
 import { config } from '../../config/config';
 ---
 
@@ -12,53 +11,76 @@ import { config } from '../../config/config';
 			src={self}
 			alt="A bird sitting on a nest of eggs."
 			width={self.width}
-			quality={40}
-			widths={[400, 768, 1024, self.width]}
+			quality={100}
+			widths={[400, 768, 1024, 1920, self.width]}
 			sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, ${self.width}px"
 			loading="eager"
 			class="w-1/2 flex-1 basis-full object-cover object-top"
 		/>
 
 		<h1
-			class="absolute left-10 mt-16 flex h-full items-center text-balance px-10 text-4xl italic text-accent max-sm:left-0 max-sm:text-center"
+			class="absolute bottom-20 left-10 text-balance px-10 text-4xl italic text-accent max-sm:left-0 max-sm:text-center max-xs:p-0"
 		>
 			Раскроем твою индивидуальность?!
 		</h1>
 	</main>
 	<section class="m-auto max-w-[980px] px-10 py-16">
 		<p class="mb-4 text-justify">
-			Доброго дня, меня зовут Анастасия и я специализируюсь на портрете. Я могу
-			могу разрушить стереотип "мужчины не любят фотографироваться".
+			Добрый день! Меня зовут Анастасия я специализируюсь на портретах.
+		</p>
+
+		<p class="mb-4 text-justify">
+			Я могу могу разрушить стереотип "мужчины не любят фотографироваться".
 		</p>
 
 		<p class="mb-4 text-justify">
 			Я стремлюсь создавать уникальные и запоминающиеся образы своих клиентов,
 			раскрывая их индивидуальность и подчеркивая лучшие черты.
 		</p>
+
 		<p class="mb-4 text-justify">
-			Моя работа — это больше, чем просто фотографирование. Это искусство,
+			Моя работа — это больше, чем просто фотографирование, это искусство,
 			которое требует тонкого понимания психологии человека, умения работать с
-			людьми и находить к ним подход. Я стараюсь создать комфортную атмосферу во
-			время съемки, на моей фотосессии Вам позировать не придется, что от Вас
-			требуется это всего лишь быть собой, а вашу позу если нужно я немного
-			поправлю для гармоничного кадра.
-		</p>
-		<p class="mb-4 text-justify">
-			Я убеждена, что каждый человек красив и уникален по-своему. Моя задача —
-			показать эту красоту и индивидуальность через объектив камеры.
+			людьми и находить к ним подход.
 		</p>
 
-		<p class="mb-10 text-justify">
+		<p class="mb-4 text-justify">
+			Фотографирую также для бизнеса и организаций, а также для журналов
+			<a
+				href="https://themost.online/"
+				target="_blank"
+				class="underline underline-offset-4 hover:text-accent"
+			>
+				Themost
+			</a> и
+			<a
+				href="https://dorogoe.tomsk.ru/"
+				target="_blank"
+				class="underline underline-offset-4 hover:text-accent"
+			>
+				Дорогое удовольствие
+			</a>.
+		</p>
+
+		<p class="mb-4 text-justify">
+			Я стараюсь создать комфортную атмосферу во время съемки, на моей
+			фотосессии Вам позировать не придется, от вас всего лишь требуется это
+			быть собой, а вашу позу если нужно я немного поправлю для гармоничного
+			кадра.
+		</p>
+
+		<p class="mb-4 text-justify">
+			Я убеждена, что каждый человек красив и уникален по-своему.
+		</p>
+
+		<p class="mb-4 text-justify">
+			Моя задача — показать эту красоту и индивидуальность через объектив
+			камеры.
+		</p>
+
+		<p class="text-justify">
 			Я не люблю наигранности и поэтому буду ловить моменты правды!
 		</p>
-
-		<a
-			href={navigation.find((item) => item.id === 'gallery')?.links?.[0]?.link}
-			class="m-auto flex w-fit items-center
-			rounded-4xl bg-stone-900 px-10 py-5 text-white hover:text-accent dark:bg-white dark:text-black"
-		>
-			{navigation.find((item) => item.id === 'gallery')?.title}
-		</a>
 	</section>
 </Layout>
 
