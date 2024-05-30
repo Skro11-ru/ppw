@@ -7,10 +7,13 @@ import { socialLink } from '../../config/links/social';
 ---
 
 <Layout title="Контакты">
-	<div class="flex gap-10">
-		<div class="flex-grow">
-			<h1 class="mb-10 text-center text-3xl">Контакты</h1>
-			<ul class="flex list-none flex-wrap gap-3">
+	<div class="">
+		<h1 class="mb-10 text-center text-3xl">Контакты</h1>
+
+		<div
+			class="flex items-start justify-center gap-10 max-sm:flex-col-reverse max-sm:items-center"
+		>
+			<ul class="flex list-none flex-col gap-3">
 				{
 					socialLink.map(({ link, icon, customClasses, label }) => {
 						return (
@@ -35,8 +38,12 @@ import { socialLink } from '../../config/links/social';
 					})
 				}
 			</ul>
+			<Image
+				src={image}
+				alt="logo"
+				width={400}
+				class="aspect-square rounded-md object-cover max-sm:w-60 max-sm:rounded-full"
+			/>
 		</div>
-
-		<Image src={image} alt="logo" width={600} class="rounded-md" />
 	</div>
 </Layout>

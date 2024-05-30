@@ -32,7 +32,7 @@ export default defineConfig({
       // start_url: "/",
       // background: "#fff",
       // theme_color: "#fff",
-      faviconsDarkMode: true,
+      // faviconsDarkMode: true,
       // appleStatusBarStyle: "black-translucent",
     }),
 	],
