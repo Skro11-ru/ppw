@@ -1,7 +1,42 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import image from '../../public/photos/contacts/contacts.jpg';
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import { socialLink } from '../../config/links/social';
 ---
 
 <Layout title="Контакты">
-	<h1 class="text-white">Контакты</h1>
+	<div class="flex gap-10">
+		<div class="flex-grow">
+			<h1 class="mb-10 text-center text-3xl">Контакты</h1>
+			<ul class="flex list-none flex-wrap gap-3">
+				{
+					socialLink.map(({ link, icon, customClasses, label }) => {
+						return (
+							<li class=" text-secondary flex-auto  basis-1/3 hover:text-accent">
+								<a
+									href={link}
+									target="_blank"
+									rel="noreferrer"
+									title={label}
+									class=" flex gap-3 text-nowrap rounded-md bg-white px-4 py-6"
+								>
+									<Icon
+										class="text-muted"
+										name={icon}
+										size={24}
+										class:list={[customClasses]}
+									/>
+									<span>Написать в {label}</span>
+								</a>
+							</li>
+						);
+					})
+				}
+			</ul>
+		</div>
+
+		<Image src={image} alt="logo" width={600} class="rounded-md" />
+	</div>
 </Layout>

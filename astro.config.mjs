@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import svelte from '@astrojs/svelte';
 import icon from 'astro-icon';
+import favicons from "astro-favicons";
 
 /** @type {import('astro').AstroUserConfig} */
 // https://astro.build/config
@@ -18,5 +19,21 @@ export default defineConfig({
 				// uis: ['*']
 			},
 		}),
+    favicons({
+      masterPicture: "./public/logo-min.svg",
+      // emitAssets: true,
+      // appName: "",
+      // appShortName: "",
+      // appDescription: "",
+      // dir:"auto",
+      // lang: "en-US",
+      // display: "standalone",
+      // orientation: "any",
+      // start_url: "/",
+      background: "#fff",
+      theme_color: "#fff",
+      faviconsDarkMode: true,
+      // appleStatusBarStyle: "black-translucent",
+    }),
 	],
 });
