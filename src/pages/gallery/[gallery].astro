@@ -57,6 +57,12 @@ const { gallery } = Astro.params;
 				object-position: 50% 50%;
 			}
 
+			@media (width <480px) {
+				:global(img) {
+					object-position: 50% 30%;
+				}
+			}
+
 			@media (width >= 480px) {
 				grid-row: span 2;
 			}

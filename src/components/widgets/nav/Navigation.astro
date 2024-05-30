@@ -3,29 +3,27 @@ import { navigation } from './navigation';
 // import logoLight from '../../../../public/logo--light.svg';
 // import logoDark from '../../../../public/logo--dark.svg';
 import logo from '../../../../public/logo.svg';
+import logoMin from '../../../../public/logo-min.svg';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 
 const currentPath = Astro.url.pathname;
 ---
 
-<div class="flex items-center text-lg">
+<a href="/" class="flex items-center text-lg">
+	<Image
+		src={logoMin}
+		alt="logo"
+		height={65}
+		class="bg-secondary hidden rounded-2xl px-1 py-0.5 sm:block md:hidden"
+	/>
 	<Image
 		src={logo}
 		alt="logo"
-		width={150}
-		class="bg-secondary rounded-2xl px-1 py-0.5 max-sm:w-[40px]"
+		height={58}
+		class="bg-secondary rounded-2xl px-1 py-0.5 sm:hidden md:block"
 	/>
-	<!--<div class="flex flex-col leading-none">-->
-	<!--	<p-->
-	<!--		class="text-3xl font-thin-->
-	<!--			leading-none max-sm:text-lg max-sm:leading-none"-->
-	<!--	>-->
-	<!--		<span class="font-medium"> SN</span>PRO-->
-	<!--	</p>-->
-	<!--	<p class="font-thin max-sm:text-sm max-sm:leading-none">photographer</p>-->
-	<!--</div>-->
-</div>
+</a>
 <nav
 	data-nav-links
 	class="text-default z-20 hidden w-full items-center
@@ -53,7 +51,7 @@ const currentPath = Astro.url.pathname;
 							<button
 								type="button"
 								class="flex items-center px-4 py-3 uppercase hover:text-accent
-								dark:hover:text-white"
+								max-md:px-3 max-md:py-2 dark:hover:text-white"
 							>
 								{title}{' '}
 								<Icon
@@ -90,7 +88,7 @@ const currentPath = Astro.url.pathname;
 					) : (
 						<a
 							class:list={[
-								'flex items-center px-4 py-3 hover:text-accent ',
+								'flex items-center px-4 py-3 hover:text-accent max-md:px-3 max-md:py-2',
 								{
 									'text-accent': link === currentPath,
 								},
