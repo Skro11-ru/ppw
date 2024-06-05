@@ -15,13 +15,13 @@ const currentPath = Astro.url.pathname;
 		src={logoMin}
 		alt="logo"
 		height={65}
-		class="bg-secondary hidden rounded-2xl px-1 py-0.5 sm:block md:hidden"
+		class="hidden rounded-2xl bg-secondary px-1 py-0.5 sm:block md:hidden"
 	/>
 	<Image
 		src={logo}
 		alt="logo"
 		height={58}
-		class="bg-secondary rounded-2xl px-1 py-0.5 sm:hidden md:block"
+		class="px-1 py-0.5 sm:hidden md:block"
 	/>
 </a>
 <nav
@@ -35,7 +35,7 @@ const currentPath = Astro.url.pathname;
 >
 	<ul
 		class="flex w-full flex-col text-xl font-medium tracking-[0.01rem] sm:w-auto
-		sm:flex-row sm:justify-center sm:self-center sm:text-[0.9375rem]"
+		sm:flex-row sm:justify-center sm:self-center sm:text-base"
 	>
 		{
 			navigation.map(({ title, link, links }) => (

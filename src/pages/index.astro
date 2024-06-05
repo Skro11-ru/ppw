@@ -6,16 +6,16 @@ import { config } from '../../config/config';
 ---
 
 <Layout title={config.meta.title} width="full">
-	<main class="relative flex h-[calc(100vh-var(--nav-height))]">
+	<main class="relative flex">
 		<Image
 			src={self}
 			alt="A bird sitting on a nest of eggs."
 			width={self.width}
-			quality={100}
+			quality={80}
 			widths={[400, 768, 1024, 1920, self.width]}
 			sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, ${self.width}px"
 			loading="eager"
-			class="w-1/2 flex-1 basis-full object-cover object-top"
+			class="h-[calc(100vh-var(--nav-height))] object-cover object-top"
 		/>
 
 		<h1
@@ -89,8 +89,4 @@ import { config } from '../../config/config';
 	</section>
 </Layout>
 
-<style>
-	:root {
-		--nav-height: 80px;
-	}
-</style>
+<style></style>

@@ -13,7 +13,7 @@ export default defineConfig({
 		icon({
 			include: {
 				// Include only three `mdi` icons in the bundle
-				mdi: ['chevron-down', 'close-circle-outline', 'check-circle-outline'],
+				mdi: ['chevron-down', 'close-circle-outline', 'check-circle-outline','phone','email-outline'],
 				cib: ['instagram', 'telegram', 'whatsapp', 'vk'],
 				// Include all `uis` icons
 				// uis: ['*']
