@@ -132,19 +132,21 @@ import '../assets/styles/tailwind.css';
 	</head>
 
 	<body
-		class="font-muller dark:bg-secondary text-secondary bg-white text-lg font-medium dark:text-white"
+		class="flex min-h-screen flex-col bg-white font-muller text-lg font-medium text-secondary dark:bg-secondary dark:text-white"
 	>
-		<header class="sticky top-0 z-20 flex h-[80px] justify-between gap-3 px-6">
+		<header
+			class="sticky top-0 z-20 flex min-h-[var(--nav-height)] justify-between gap-3 bg-secondary/50 px-6 text-white"
+		>
 			<Navigation />
 			<ThemeIcon />
 		</header>
 
 		<div
-			class="mx-auto max-w-[1280px]"
+			class="mx-auto w-full max-w-[1280px] flex-1"
 			class:list={[
 				{ '!max-w-full': width === 'full' },
 				{ 'px-6': currentPath !== '/' },
-				{ 'py-16': currentPath !== '/' },
+				{ 'py-8': currentPath !== '/' },
 			]}
 		>
 			<!--      display: flex;-->
@@ -203,6 +205,8 @@ import '../assets/styles/tailwind.css';
 		</script>
 		<style lang="scss">
 			.top-nav-shadow {
+				transition: background-color 0.5s ease;
+
 				@apply shadow-xl;
 				@apply backdrop-blur;
 			}

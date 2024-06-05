@@ -7,41 +7,72 @@ import { socialLink } from '../../config/links/social';
 ---
 
 <Layout title="Контакты">
-	<div class="">
-		<h1 class="mb-10 text-center text-3xl">Контакты</h1>
+	<div class="font-montserrat">
+    <div class='text-4xl mb-10 text-center'> Хочешь <span>я покажу</span> <span class='text-accent  text-6xl'>тебя?</span></div>
 
 		<div
-			class="flex items-start justify-center gap-10 max-sm:flex-col-reverse max-sm:items-center"
+			class="flex items-start justify-center gap-10 max-sm:flex-col-reverse max-sm:items-center "
 		>
-			<ul class="flex list-none flex-col gap-3">
-				{
-					socialLink.map(({ link, icon, customClasses, label }) => {
-						return (
-							<li class=" text-secondary flex-auto  basis-1/3 hover:text-accent">
-								<a
-									href={link}
-									target="_blank"
-									rel="noreferrer"
-									title={label}
-									class=" flex gap-3 text-nowrap rounded-md bg-white px-4 py-6"
-								>
-									<Icon
-										class="text-muted"
-										name={icon}
-										size={24}
-										class:list={[customClasses]}
-									/>
-									<span>Написать в {label}</span>
-								</a>
-							</li>
-						);
-					})
-				}
-			</ul>
+			<section class="grid grid-cols-1">
+
+				<ul class="mb-4">
+					<li class="flex gap-3">
+						<Icon class="text-muted" name={'mdi:phone'} size={24} />
+						<a href="tel:+79138202385" target="_blank" rel="noreferrer">
+							+7 (913) 820-23-85
+						</a>
+					</li>
+					<li class="flex gap-3">
+						<Icon class="text-muted" name={'mdi:email-outline'} size={24} />
+						<a href="mailto:ooo.basic@mail.ru" target="_blank" rel="noreferrer">
+							ooo.basic@mail.ru
+						</a>
+					</li>
+				</ul>
+				<!--grid-->
+				<!--grid grid-cols-2 justify-items-center gap-12-->
+				<ul
+					class="list-none grid grid-cols-2 gap-7"
+				>
+					{
+						socialLink.map(async ({ link/*, icon, customClasses*/, label, qr }) => {
+							return (
+								<li class="text-secondary">
+									<a
+										href={link}
+										target="_blank"
+										rel="noreferrer"
+										title={label}
+										class=" flex gap-3 text-nowrap   hover:text-accent"
+									>
+										{() => {
+											if (qr) {
+												return (
+                          <img src={qr.src} class='' alt='' width='100'/>
+													<!--<Image-->
+													<!--	src={qr.src}-->
+													<!--	width={120 ?? qr.attributes.width}-->
+													<!--	height={120 ?? qr.attributes.height}-->
+													<!--	alt="A bird sitting on a nest of eggs."-->
+													<!--	quality={100}-->
+													<!--	loading="eager"-->
+													<!--	class=""-->
+													<!--/>-->
+												);
+											}
+										}}
+									</a>
+								</li>
+							);
+						})
+					}
+				</ul>
+			</section>
 			<Image
 				src={image}
 				alt="logo"
-				width={400}
+				width={428}
+				height={428}
 				class="aspect-square rounded-md object-cover max-sm:w-60 max-sm:rounded-full"
 			/>
 		</div>

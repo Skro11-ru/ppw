@@ -2,28 +2,27 @@
 @import 'themes/dark';
 
 body {
-  color: var(--primary-color);
-  font: var(--font-s);
-  background: var(--bg-color);
+	color: var(--primary-color);
+	font: var(--font-s);
+	background: var(--bg-color);
 }
 
-
-
 :root {
-  --accent: 136, 58, 234;
-  --accent-light: 224, 204, 250;
-  --accent-dark: 49, 10, 101;
-  --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      #fff 60%
-  );
+	--nav-height: 80px;
+	--accent: 136, 58, 234;
+	--accent-light: 224, 204, 250;
+	--accent-dark: 49, 10, 101;
+	--accent-gradient: linear-gradient(
+		45deg,
+		rgb(var(--accent)),
+		rgb(var(--accent-light)) 30%,
+		#fff 60%
+	);
 }
 
 html {
-  overflow-x: hidden;
-  font-family: system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizelegibility;
+	overflow-x: hidden;
+	font-family: system-ui, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizelegibility;
 }

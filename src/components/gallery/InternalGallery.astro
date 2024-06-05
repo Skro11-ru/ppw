@@ -130,7 +130,7 @@ const isDev = import.meta.env.MODE === 'development';
 		const cssClassImage =
 			'h-full w-full transform rounded-lg object-cover transition-transform ' +
 			'duration-500 ease-[cubic-bezier(0.165,0.84,0.44,1)] hover:scale-105';
-		const sizesImage = `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${width}px`;
+		const sizesImage = `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px`;
 		return (
 			<a
 				class="relative overflow-hidden grayscale hover:grayscale-0"
@@ -150,7 +150,7 @@ const isDev = import.meta.env.MODE === 'development';
 					alt="A bird sitting on a nest of eggs."
 					width={width}
 					quality={90}
-					widths={[240, 540, 720, width]}
+					widths={[240, 540, 720]}
 					sizes={sizesImage}
 					decoding="async"
 					loading="lazy"
