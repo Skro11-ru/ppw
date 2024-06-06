@@ -135,7 +135,7 @@ import '../assets/styles/tailwind.css';
 		class="flex min-h-screen flex-col bg-white font-muller text-lg font-medium text-secondary dark:bg-secondary dark:text-white"
 	>
 		<header
-			class="sticky top-0 z-20 flex min-h-[var(--nav-height)] justify-between gap-3 bg-secondary/50 px-6 text-white"
+			class="sticky top-0 z-20 flex min-h-[var(--nav-height)] justify-between gap-3 bg-secondary px-6 text-white"
 		>
 			<Navigation />
 			<ThemeIcon />
@@ -149,14 +149,6 @@ import '../assets/styles/tailwind.css';
 				{ 'py-8': currentPath !== '/' },
 			]}
 		>
-			<!--      display: flex;-->
-			<!--      flex-direction: column;-->
-			<!--      position: fixed;-->
-			<!--      top: 50%;-->
-			<!--      left: 45px;-->
-			<!--      transform: translateY(-50%);-->
-			<!--      row-gap: 15px;-->
-			<!--      z-index: 100;-->
 			<ul
 				class="fixed right-8 top-[50%] z-10 flex -translate-y-1/2 transform flex-col gap-5 max-xs:hidden"
 			>
@@ -164,11 +156,12 @@ import '../assets/styles/tailwind.css';
 					socialLink.map(({ link, icon, customClasses, label }) => {
 						return (
 							<li class="hover:text-accent">
-								<a href={link} target="_blank" rel="noreferrer" title={label}>
+								<a href={link} target="_blank" rel="noreferrer">
 									<Icon
 										class="text-muted"
 										name={icon}
 										size={24}
+										title={label}
 										class:list={[customClasses]}
 									/>
 								</a>
@@ -209,6 +202,7 @@ import '../assets/styles/tailwind.css';
 
 				@apply shadow-xl;
 				@apply backdrop-blur;
+				@apply bg-secondary/50;
 			}
 		</style>
 	</body>

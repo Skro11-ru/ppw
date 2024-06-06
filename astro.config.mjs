@@ -15,12 +15,13 @@ export default defineConfig({
 				// Include only three `mdi` icons in the bundle
 				mdi: ['chevron-down', 'close-circle-outline', 'check-circle-outline','phone','email-outline'],
 				cib: ['instagram', 'telegram', 'whatsapp', 'vk'],
+        fa:['phone','envelope-o']
 				// Include all `uis` icons
 				// uis: ['*']
 			},
 		}),
     favicons({
-      masterPicture: "./src/favicon.svg",
+      masterPicture: "./public/logo-min--black.svg",
       // emitAssets: true,
       // appName: "",
       // appShortName: "",

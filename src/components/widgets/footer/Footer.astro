@@ -15,20 +15,21 @@ const { links } = Astro.props as Props;
 ---
 
 <footer
-	class="font-montserrat flex flex-wrap justify-between gap-4 border-t-[1px] px-6 py-5"
+	class="flex flex-wrap justify-between gap-4 border-t-[1px] px-6 py-5 font-montserrat"
 >
 	<p class="">
 		&copy; 2024 {config.name}. <br />Все права защищены.
 	</p>
-	<ul class="flex items-center gap-3">
+	<ul class="hidden w-full items-center justify-between gap-3 max-xs:flex">
 		{
 			links.map(({ link, icon, customClasses, label }) => {
 				return (
 					<li class="hover:text-accent">
-						<a href={link} target="_blank" rel="noreferrer" title={label}>
+						<a href={link} target="_blank" rel="noreferrer">
 							<Icon
 								class="text-muted"
 								name={icon}
+								title={label}
 								size={32}
 								class:list={[customClasses]}
 							/>

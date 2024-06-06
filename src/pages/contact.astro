@@ -8,72 +8,65 @@ import { socialLink } from '../../config/links/social';
 
 <Layout title="Контакты">
 	<div class="font-montserrat">
-    <div class='text-4xl mb-10 text-center'> Хочешь <span>я покажу</span> <span class='text-accent  text-6xl'>тебя?</span></div>
+		<div class="mb-10 text-center text-4xl">
+			Хочешь <span>я покажу</span>
+			<span class="text-6xl text-accent">тебя?</span>
+		</div>
 
 		<div
-			class="flex items-start justify-center gap-10 max-sm:flex-col-reverse max-sm:items-center "
+			class="flex items-start justify-center gap-10 max-sm:flex-col-reverse max-sm:items-center"
 		>
 			<section class="grid grid-cols-1">
-
 				<ul class="mb-4">
-					<li class="flex gap-3">
+					<li class="flex items-center gap-3">
 						<Icon class="text-muted" name={'mdi:phone'} size={24} />
 						<a href="tel:+79138202385" target="_blank" rel="noreferrer">
 							+7 (913) 820-23-85
 						</a>
 					</li>
-					<li class="flex gap-3">
+					<li class="flex items-center gap-3">
 						<Icon class="text-muted" name={'mdi:email-outline'} size={24} />
 						<a href="mailto:ooo.basic@mail.ru" target="_blank" rel="noreferrer">
 							ooo.basic@mail.ru
 						</a>
 					</li>
 				</ul>
-				<!--grid-->
-				<!--grid grid-cols-2 justify-items-center gap-12-->
-				<ul
-					class="list-none grid grid-cols-2 gap-7"
-				>
+				<ul class="grid list-none grid-cols-2 gap-7">
 					{
-						socialLink.map(async ({ link/*, icon, customClasses*/, label, qr }) => {
-							return (
-								<li class="text-secondary">
-									<a
-										href={link}
-										target="_blank"
-										rel="noreferrer"
-										title={label}
-										class=" flex gap-3 text-nowrap   hover:text-accent"
-									>
-										{() => {
-											if (qr) {
-												return (
-                          <img src={qr.src} class='' alt='' width='100'/>
-													<!--<Image-->
-													<!--	src={qr.src}-->
-													<!--	width={120 ?? qr.attributes.width}-->
-													<!--	height={120 ?? qr.attributes.height}-->
-													<!--	alt="A bird sitting on a nest of eggs."-->
-													<!--	quality={100}-->
-													<!--	loading="eager"-->
-													<!--	class=""-->
-													<!--/>-->
-												);
-											}
-										}}
-									</a>
-								</li>
-							);
-						})
+						socialLink.map(
+							async ({ link /*, icon, customClasses*/, label, qr }) => {
+								return (
+									<li class="text-secondary">
+										<a
+											href={link}
+											target="_blank"
+											rel="noreferrer"
+											title={label}
+											class=" relative flex h-[124px] w-[124px] flex-col items-center text-nowrap rounded-md bg-white hover:text-accent  "
+										>
+											{() => {
+												if (qr) {
+													return (
+														<img src={qr.src} class="" alt="" width="100" />
+													);
+												}
+											}}
+											<span class="absolute bottom-0 leading-8">Перейти</span>
+										</a>
+									</li>
+								);
+							},
+						)
 					}
 				</ul>
 			</section>
 			<Image
 				src={image}
-				alt="logo"
-				width={428}
-				height={428}
-				class="aspect-square rounded-md object-cover max-sm:w-60 max-sm:rounded-full"
+				alt="self photo"
+				width={400}
+				height={500}
+				style="object-position: 0 33%"
+				class="aspect-square rounded-md object-cover max-sm:w-60 max-sm:rounded-full max-sm:!object-right-top"
 			/>
 		</div>
 	</div>

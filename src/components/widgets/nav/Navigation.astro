@@ -1,7 +1,5 @@
 ---
 import { navigation } from './navigation';
-// import logoLight from '../../../../public/logo--light.svg';
-// import logoDark from '../../../../public/logo--dark.svg';
 import logo from '../../../../public/logo.svg';
 import logoMin from '../../../../public/logo-min.svg';
 import { Icon } from 'astro-icon/components';
@@ -15,12 +13,14 @@ const currentPath = Astro.url.pathname;
 		src={logoMin}
 		alt="logo"
 		height={65}
+		loading="eager"
 		class="hidden rounded-2xl bg-secondary px-1 py-0.5 sm:block md:hidden"
 	/>
 	<Image
 		src={logo}
 		alt="logo"
 		height={58}
+		loading="eager"
 		class="px-1 py-0.5 sm:hidden md:block"
 	/>
 </a>
