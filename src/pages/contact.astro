@@ -42,7 +42,7 @@ import { socialLink } from '../../config/links/social';
 											target="_blank"
 											rel="noreferrer"
 											title={label}
-											class=" relative flex h-[124px] w-[124px] flex-col items-center text-nowrap rounded-md bg-white hover:text-accent  "
+											class=" relative flex h-[124px] w-[124px] flex-col items-center text-nowrap rounded-md border border-accent bg-white hover:text-accent dark:border-none"
 										>
 											{() => {
 												if (qr) {
@@ -66,7 +66,7 @@ import { socialLink } from '../../config/links/social';
 				width={400}
 				height={500}
 				style="object-position: 0 33%"
-				class="rounded-md object-cover max-sm:w-60 max-sm:rounded-full max-sm:!object-right-top"
+				class="rounded-md object-cover max-sm:aspect-square max-sm:w-60 max-sm:rounded-full max-sm:!object-right-top"
 			/>
 		</div>
 	</div>
