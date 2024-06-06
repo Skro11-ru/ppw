@@ -8,8 +8,8 @@
 		font-family: 'Montserrat';
 		font-style: normal;
 		src:
-			url('../../../public/fonts/Montserrat-Light.woff2') format('woff2'),
-			url('../../../public/fonts/Montserrat-Light.woff') format('woff');
+			url('/fonts/Montserrat-Light.woff2') format('woff2'),
+			url('/fonts/Montserrat-Light.woff') format('woff');
 		font-display: block;
 	}
 
@@ -18,8 +18,8 @@
 		font-family: 'Montserrat';
 		font-style: normal;
 		src:
-			url('../../../public/fonts/Montserrat-Regular.woff2') format('woff2'),
-			url('../../../public/fonts/Montserrat-Regular.woff') format('woff');
+			url('/fonts/Montserrat-Regular.woff2') format('woff2'),
+			url('/fonts/Montserrat-Regular.woff') format('woff');
 		font-display: block;
 	}
 
@@ -28,8 +28,8 @@
 		font-family: 'Muller-Trial';
 		font-style: normal;
 		src:
-			url('../../../public/fonts/Muller-Trial-Thin.woff2') format('woff2'),
-			url('../../../public/fonts/Muller-Trial-Thin.woff') format('woff');
+			url('/fonts/Muller-Trial-Thin.woff2') format('woff2'),
+			url('/fonts/Muller-Trial-Thin.woff') format('woff');
 		font-display: block;
 	}
 
@@ -38,8 +38,8 @@
 		font-family: 'Muller-Trial';
 		font-style: normal;
 		src:
-			url('../../../public/fonts/Muller-Trial-ExtraBold.woff2') format('woff2'),
-			url('../../../public/fonts/Muller-Trial-ExtraBold.woff') format('woff');
+			url('/fonts/Muller-Trial-ExtraBold.woff2') format('woff2'),
+			url('/fonts/Muller-Trial-ExtraBold.woff') format('woff');
 		font-display: block;
 	}
 
@@ -48,8 +48,8 @@
 		font-family: 'Muller-Trial';
 		font-style: normal;
 		src:
-			url('../../../public/fonts/Muller-Trial-Regular.woff2') format('woff2'),
-			url('../../../public/fonts/Muller-Trial-Regular.woff') format('woff');
+			url('/fonts/Muller-Trial-Regular.woff2') format('woff2'),
+			url('/fonts/Muller-Trial-Regular.woff') format('woff');
 		font-display: block;
 	}
 }

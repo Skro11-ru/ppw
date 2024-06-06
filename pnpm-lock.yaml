@@ -20,6 +20,9 @@ dependencies:
   '@iconify-json/cib':
     specifier: 1.1.8
     version: 1.1.8
+  '@iconify-json/fa':
+    specifier: 1.1.8
+    version: 1.1.8
   '@iconify-json/mdi':
     specifier: 1.1.66
     version: 1.1.66
@@ -1405,6 +1408,12 @@ packages:
 
   /@iconify-json/cib@1.1.8:
     resolution: {integrity: sha512-wL7uxAq8pC9la11dRSHUrz4g4cNLhoR8VC/rnmTcswER/vICNgUYt7vNs0VVaGjC6G1dTY+iyKS4ooRCXChsqw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
+
+  /@iconify-json/fa@1.1.8:
+    resolution: {integrity: sha512-he23ZsuDxA6Hx7rnrEpSJnmu7t7RtG/SbrENZhMSPiZ4bNRGHjyPZimtOy10k2/nfwNsW57ECDsO5eK0BkcoMg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false

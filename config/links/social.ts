@@ -59,14 +59,14 @@ type TSocialLink = {
 
 export const socialLink: TSocialLink[] = [
 	{
-		icon: 'mdi:phone',
+		icon: 'fa:phone',
 		label: 'phone',
 		link: 'tel:+79138202385',
 		customClasses: ['text-muted', 'hover:text-fuchsia-600'],
 		qr: phQR,
 	},
 	{
-		icon: 'mdi:email-outline',
+		icon: 'fa:envelope-o',
 		label: 'mail',
 		link: 'mailto:ooo.basic@mail.ru',
 		customClasses: ['text-muted', 'hover:text-fuchsia-600'],
