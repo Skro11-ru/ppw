@@ -9,6 +9,9 @@ const isActive =
 	(currentPath === '/blog' && name === 'Все');
 ---
 
+<span hidden>
+	{currentPath}---{name}
+</span>
 <a
 	href={name === 'Все'
 		? '/blog'
