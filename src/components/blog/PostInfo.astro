@@ -24,23 +24,27 @@ const unsluglifyNameCategory = unsluglify(category!.toLowerCase());
 ---
 
 <div class:list={['flex w-full items-center gap-3 px-2', classList]}>
-	<span class="flex items-center gap-1 text-ellipsis">
+	<span class="flex items-center gap-1 whitespace-nowrap">
 		<Icon class="text-muted" name={'carbon:calendar'} size={iconSize} />
 		<FormattedDate date={date} />
 	</span>
 	<span class="flex items-center gap-1 text-ellipsis">
 		<Icon class="text-muted" name={'carbon:time'} size={iconSize} />
-		<span>
+		<span class="whitespace-nowrap">
 			{time}
 		</span>
 	</span>
 
 	<a
 		href={sluglify(`/category/${unsluglifyNameCategory}/1`)}
-		class="line-clamp-1 flex items-center gap-1 overflow-hidden hover:text-accent"
+		class="flex items-center gap-1 overflow-hidden hover:text-accent"
 	>
-		<Icon class="text-muted" name={'carbon:categories'} size={iconSize} />
-		<span>
+		<Icon
+			class="text-muted overflow-visible"
+			name={'carbon:categories'}
+			size={iconSize}
+		/>
+		<span class="line-clamp-1 break-all">
 			{category}
 		</span>
 	</a>
