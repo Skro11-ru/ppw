@@ -42,6 +42,7 @@ export default {
 				},
 			});
 		},
+		require('@tailwindcss/typography'),
 	],
 	darkMode: ['selector', '.dark'],
 };

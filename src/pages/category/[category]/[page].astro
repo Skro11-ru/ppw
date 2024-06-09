@@ -1,0 +1,41 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ListCategories from '../../../components/blog/ListCategories.astro';
+import { getCategories, getPosts } from '../../../utils/post';
+import { sluglify, unsluglify } from '../../../utils/sluglify';
+import Pagination from '../../../components/Pagination.astro';
+import ListPosts from '../../../components/blog/ListPosts.astro';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getStaticPaths({ paginate }: any) {
+	const categories = await getCategories();
+	const allPosts = await getPosts();
+
+	return categories.flatMap((category: string) => {
+		const unsluglifyNameCategory = unsluglify(category!.toLowerCase());
+		const filteredPosts = allPosts.filter(
+			(post) => post.data.category.toLowerCase() === unsluglifyNameCategory,
+		);
+
+		// eslint-disable-next-line unicorn/no-abusive-eslint-disable
+		return paginate(filteredPosts, {
+			params: {
+				category: sluglify(category.toLowerCase()),
+			},
+			pageSize: 6,
+		});
+	});
+}
+const parameters = Astro.params;
+const { page } = Astro.props;
+
+// const unsluglifyNameCategory = unsluglify(params.category!.toLowerCase());
+const posts = page.data;
+---
+
+<Layout title={parameters.category}>
+	<!--<h1 class="text-white">{unsluglifyNameCategory}</h1>-->
+	<ListCategories activeCategory={parameters.category} />
+	<ListPosts posts={posts} />
+	<Pagination page={page} />
+</Layout>

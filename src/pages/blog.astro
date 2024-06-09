@@ -1,7 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ListCategories from '@components/blog/ListCategories.astro';
+import ListPosts from '../components/blog/ListPosts.astro';
+import { getPosts } from '../utils/post';
+
+const MAX_POSTS = 5; // max number of posts to show on the home page
+const posts = await getPosts(MAX_POSTS);
 ---
 
 <Layout title="Блог">
-	<h1 class="text-white">Блог</h1>
+	<ListCategories />
+	<div>
+		<ListPosts FirstBig={false} posts={posts} />
+	</div>
 </Layout>

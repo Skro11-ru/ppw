@@ -1,0 +1,79 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import { Image } from 'astro:assets';
+import Layout from './Layout.astro';
+import Tag from '../components/Tag.astro';
+import PostInfo from '../components/blog/PostInfo.astro';
+import { Icon } from 'astro-icon/components';
+
+type Props = {
+	id: CollectionEntry<'blog'>['id'];
+	data: CollectionEntry<'blog'>['data'];
+	headings: MarkdownHeading[];
+	readTime: string;
+};
+
+const { data, readTime } = Astro.props;
+const { title, pubDate, heroImage, tags, category } = data;
+---
+
+<Layout title={title}>
+	<article class="mx-auto max-w-screen-sm">
+		<header class="mb-3 flex flex-col items-center justify-center gap-6">
+			<div class="flex flex-col gap-2">
+				<h1 class="text-center text-4xl font-semibold md:pb-2.5 md:text-6xl">
+					{title}
+				</h1>
+				<PostInfo
+					date={pubDate}
+					time={readTime}
+					category={category}
+					iconSize={22}
+					classList="justify-center gap-8 max-sm:gap-4 max-sm:text-sm max-xs:text-xs max-xs:gap-2 max-xs:px-0 max-xs:flex-wrap"
+				/>
+			</div>
+		</header>
+
+		<>
+			{
+				heroImage && (
+					<Image
+						src={heroImage}
+						width={1000}
+						height={500}
+						quality={100}
+						format="jpg"
+						loading="eager"
+						class="my-8  w-full  rounded-md object-cover "
+						alt={`img of ${title}`}
+						style="object-position: 10% 15%"
+					/>
+				)
+			}
+		</>
+
+		<hr />
+
+		<div>
+			<slot />
+		</div>
+
+		<footer>
+			{
+				tags.length > 0 && (
+					<div class="flex flex-wrap items-center gap-2 gap-y-4 md:gap-5">
+						{tags.map((tag) => (
+							<Tag tag={tag} />
+						))}
+					</div>
+				)
+			}
+
+			<a href="/blog" class="mt-8 flex items-center hover:text-accent">
+				<Icon class="text-muted" name={'mdi:chevron-left'} size={22} />
+				<span>Назад к блогу</span>
+			</a>
+		</footer>
+	</article>
+</Layout>

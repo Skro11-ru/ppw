@@ -1,0 +1,47 @@
+---
+import { unsluglify } from '../../utils/sluglify';
+import { Icon } from 'astro-icon/components';
+import FormattedDate from '../FormattedDate.astro';
+import { sluglify } from '../../utils/sluglify';
+
+type TProps = {
+	date: Date;
+	time: string;
+	category: string;
+	classList: string;
+	iconSize: number;
+};
+
+const {
+	date,
+	time,
+	category,
+	classList,
+	iconSize = 14,
+} = Astro.props as TProps;
+
+const unsluglifyNameCategory = unsluglify(category!.toLowerCase());
+---
+
+<div class:list={['flex w-full items-center gap-3 px-2', classList]}>
+	<span class="flex items-center gap-1 text-ellipsis">
+		<Icon class="text-muted" name={'carbon:calendar'} size={iconSize} />
+		<FormattedDate date={date} />
+	</span>
+	<span class="flex items-center gap-1 text-ellipsis">
+		<Icon class="text-muted" name={'carbon:time'} size={iconSize} />
+		<span>
+			{time}
+		</span>
+	</span>
+
+	<a
+		href={sluglify(`/category/${unsluglifyNameCategory}/1`)}
+		class="line-clamp-1 flex items-center gap-1 overflow-hidden hover:text-accent"
+	>
+		<Icon class="text-muted" name={'carbon:categories'} size={iconSize} />
+		<span>
+			{category}
+		</span>
+	</a>
+</div>
