@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import PostInfo from './blog/PostInfo.astro';
+
+const {
+	data: { title, description, pubDate, heroImage, category },
+	readTime,
+	slug,
+} = Astro.props;
+---
+
+<article
+	class="group grid min-h-full grid-rows-[300px_auto] md:grid-rows-[300px_220px]"
+>
+	<div class="relative overflow-hidden">
+		<a href={`/post/${slug}/`}>
+			<Image
+				src={heroImage}
+				height={heroImage.width}
+				format="webp"
+				loading="eager"
+				style="object-position: 10% 15%"
+				class="h-full min-w-full rounded-[2px] object-cover transition-all duration-200 hover:scale-[101%]"
+				alt={`img of ${title}`}
+			/>
+		</a>
+
+		<div
+			class="glass absolute bottom-0 z-30 flex h-10 w-full items-center text-xs text-white"
+		>
+			<PostInfo
+				date={pubDate}
+				time={readTime}
+				category={category}
+				classList="justify-end text-xs"
+			/>
+		</div>
+	</div>
+
+	<div class="flex flex-col justify-between gap-4 py-6 md:gap-0">
+		<div class="flex flex-col gap-3">
+			<div class="flex flex-col gap-2">
+				<a
+					class="text-2xl font-semibold -tracking-wider"
+					href={`/post/${slug}/`}
+				>
+					{title}
+				</a>
+			</div>
+
+			<p
+				class="line-clamp-3 overflow-hidden font-[400] text-gray-700 dark:text-white"
+			>
+				{description}
+			</p>
+		</div>
+	</div>
+</article>

@@ -90,7 +90,9 @@ const currentPath = Astro.url.pathname;
 							class:list={[
 								'flex items-center px-4 py-3 hover:text-accent max-md:px-3 max-md:py-2',
 								{
-									'text-accent': link === currentPath,
+									'text-accent':
+										link === currentPath ||
+										(link.includes('blog') && currentPath.includes('category')),
 								},
 							]}
 							href={link}

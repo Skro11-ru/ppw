@@ -1,0 +1,113 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import { getPosts } from '../../utils/post';
+import BlogPost from '../../layouts/BlogPost.astro';
+import ListRelatedPosts from '../../components/blog/ListRelatedPosts.astro';
+import { Image } from 'astro:assets';
+
+const posts = await getCollection('blog');
+export async function getStaticPaths() {
+	const postsPath = await getPosts();
+
+	return postsPath.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const MAX_POSTS = 3;
+const getRelatedPosts = (relatedPost: Props) => {
+	const lowercaseTags = new Set(
+		relatedPost.data.tags.map((tag) => tag.toLowerCase()),
+	);
+	const relatedPosts = posts.filter(
+		(p) =>
+			p.slug !== relatedPost.slug &&
+			p.data.tags.some((t) => lowercaseTags.has(t.toLowerCase())),
+	);
+	return relatedPosts.slice(0, MAX_POSTS);
+};
+
+const relatedPosts = getRelatedPosts(post);
+
+const { Content, headings, remarkPluginFrontmatter } = await post.render();
+---
+
+<BlogPost
+	id={post.id}
+	data={post.data}
+	headings={headings}
+	readTime={remarkPluginFrontmatter.minutesRead}
+>
+	<div class="mt-8 text-justify">
+		<article class="w-full max-w-full">
+			<div
+				class="prose prose-lg md:prose-xl dark:prose-invert mb-12 min-w-full"
+			>
+				<Content />
+			</div>
+			<div class="gal mb-8 flex flex-wrap gap-5 max-xs:justify-center">
+				{
+					(post?.data?.images ?? [])?.length > 0 &&
+						post?.data?.images?.map((image) => {
+							const { width, height, src /*index , format*/ } = image;
+							const cssClassImage =
+								'transform rounded-lg object-cover transition-transform ' +
+								'duration-500 ease-[cubic-bezier(0.165,0.84,0.44,1)] ' +
+								'hover:scale-105 aspect-square max-xs:w-full';
+
+							const sizesImage = `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px`;
+							return (
+								<>
+									<a
+										href={src}
+										data-pswp-width={width}
+										data-pswp-height={height}
+										data-cropped="true"
+									>
+										<Image
+											src={image}
+											width={200}
+											height={200}
+											format="webp"
+											quality={90}
+											widths={[240, 540, 720]}
+											sizes={sizesImage}
+											decoding="async"
+											loading="lazy"
+											style="object-position: 10% 15%"
+											class={cssClassImage}
+											alt={`img of ${'title'}`}
+										/>
+									</a>
+								</>
+							);
+						})
+				}
+			</div>
+
+			<!-- related posts -->
+			<footer>
+				<ListRelatedPosts posts={relatedPosts} />
+			</footer>
+		</article>
+	</div>
+
+	<!--{disqusEnabled && <Disqus />}-->
+</BlogPost>
+
+<script>
+	import PhotoSwipeLightbox from 'photoswipe/lightbox';
+	import 'photoswipe/style.css';
+
+	const lightbox = new PhotoSwipeLightbox({
+		bgOpacity: 0.9,
+		gallery: '.gal',
+		children: 'a',
+		pswpModule: () => import('photoswipe'),
+	});
+
+	lightbox.init();
+</script>

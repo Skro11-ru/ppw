@@ -4,11 +4,21 @@ import svelte from '@astrojs/svelte';
 import icon from 'astro-icon';
 import favicons from 'astro-favicons';
 import sitemap from '@astrojs/sitemap';
+import mdx from '@astrojs/mdx';
+import { remarkReadingTime } from './src/utils/readTime.ts';
 
 /** @type {import('astro').AstroUserConfig} */
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://snpro-photo.ru',
+	site: 'https://snpro-photo.ru',
+  markdown: {
+    remarkPlugins: [remarkReadingTime],
+    drafts: true,
+    shikiConfig: {
+      theme: 'material-theme-palenight',
+      wrap: true
+    }
+  },
 	integrations: [
 		tailwind({
 			applyBaseStyles: false,
@@ -23,9 +33,11 @@ export default defineConfig({
 					'check-circle-outline',
 					'phone',
 					'email-outline',
+          'chevron-left'
 				],
 				cib: ['instagram', 'telegram', 'whatsapp', 'vk'],
 				fa: ['phone', 'envelope-o'],
+				carbon: ['calendar','time','categories'],
 				// Include all `uis` icons
 				// uis: ['*']
 			},
@@ -47,5 +59,17 @@ export default defineConfig({
 			// appleStatusBarStyle: "black-translucent",
 		}),
 		sitemap(),
+
+    mdx({
+      syntaxHighlight: 'shiki',
+      shikiConfig: {
+        experimentalThemes: {
+          light: 'vitesse-light',
+          dark: 'material-theme-palenight',
+        },
+        wrap: true
+      },
+      drafts: true
+    }),
 	],
 });

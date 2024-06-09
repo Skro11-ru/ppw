@@ -26,3 +26,12 @@ html {
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizelegibility;
 }
+
+.glass {
+  z-index: -1;
+  background: rgb(57 56 56 / 52%);
+  -webkit-backdrop-filter: blur(13px) saturate(150%);
+  backdrop-filter: blur(13px) saturate(150%);
+}
+
+
