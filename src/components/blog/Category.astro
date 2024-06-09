@@ -6,15 +6,12 @@ const unsluglifyNameCategory = sluglify(name.toLowerCase());
 
 const isActive =
 	activeCategory?.toLocaleLowerCase() === unsluglifyNameCategory ||
-	(currentPath === '/blog' && name === 'Все');
+	(currentPath === '/blog/' && name === 'Все');
 ---
 
-<span hidden>
-	{currentPath}---{name}
-</span>
 <a
 	href={name === 'Все'
-		? '/blog'
+		? '/blog/'
 		: sluglify(`/category/${unsluglifyNameCategory}/1`)}
 	class:list={[
 		'border-b-2 border-black border-opacity-0  px-3 pb-2.5 font-medium text-gray-600 transition-colors duration-150 ease-linear first-letter:uppercase hover:border-opacity-100  dark:border-white dark:border-opacity-0 dark:text-gray-300 dark:hover:border-white',

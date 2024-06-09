@@ -7,39 +7,39 @@ export const navigation = [
 	{
 		id: 'gallery',
 		title: 'Портфолио',
-		link: '/gallery',
+		link: '/gallery/',
 		links: [
 			{
 				title: 'Мужской портрет',
-				link: '/gallery/man',
+				link: '/gallery/man/',
 			},
 			{
 				title: 'Бизнес-портрет',
-				link: '/gallery/business',
+				link: '/gallery/business/',
 			},
 			{
 				title: 'Женский портрет',
-				link: '/gallery/woman',
+				link: '/gallery/woman/',
 			},
 			{
 				title: 'Разное',
-				link: '/gallery/other',
+				link: '/gallery/other/',
 			},
 			{
 				title: 'Moto life',
-				link: '/gallery/moto',
+				link: '/gallery/moto/',
 			},
 		],
 	},
 	{
 		id: 'achievements',
 		title: 'Достижения',
-		link: '/achievements',
+		link: '/achievements/',
 	},
 	{
 		id: 'blog',
 		title: 'Блог',
-		link: '/blog',
+		link: '/blog/',
 		// links: [
 		// 	{
 		// 		title: 'Ссылка 1',
@@ -58,11 +58,11 @@ export const navigation = [
 	{
 		id: 'tariffs',
 		title: 'Стоимость',
-		link: '/tariffs',
+		link: '/tariffs/',
 	},
 	{
 		id: 'contact',
 		title: 'Контакты',
-		link: '/contact',
+		link: '/contact/',
 	},
 ];
