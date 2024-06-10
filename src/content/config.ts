@@ -1,13 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 // List of categories for blog posts
-export const CATEGORIES = [
-	'Category 1',
-	'Category 2',
-	'Category 3',
-	'Category 4',
-	'Category 5',
-	'Быть, а не казаться',
-] as const;
+export const CATEGORIES = ['Быть, а не казаться'] as const;
 
 const blog = defineCollection({
 	// Type-check frontmatter using a schema
@@ -17,12 +10,14 @@ const blog = defineCollection({
 			description: z.string(),
 			// Transform string to Date object
 			pubDate: z
+				// .string()
+				// .transform((val) => {
+				// 	const [day, month, year] = val.split('.');
+				// 	return new Date(Number(year), Number(month) - 1, Number(day));
+				// }),
 				.string()
-				// .or(z.date())
-				.transform((val) => {
-					const [day, month, year] = val.split('.');
-					return new Date(Number(year), Number(month) - 1, Number(day));
-				}),
+				.or(z.date())
+				.transform((val) => new Date(val)),
 			heroImage: image(),
 			images: z.array(image()).optional(),
 			category: z.enum(CATEGORIES),
