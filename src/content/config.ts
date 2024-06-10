@@ -18,8 +18,11 @@ const blog = defineCollection({
 			// Transform string to Date object
 			pubDate: z
 				.string()
-				.or(z.date())
-				.transform((val) => new Date(val)),
+				// .or(z.date())
+				.transform((val) => {
+					const [day, month, year] = val.split('.');
+					return new Date(Number(year), Number(month) - 1, Number(day));
+				}),
 			heroImage: image(),
 			images: z.array(image()).optional(),
 			category: z.enum(CATEGORIES),
