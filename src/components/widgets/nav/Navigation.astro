@@ -34,8 +34,8 @@ const currentPath = Astro.url.pathname;
 	aria-label="Main navigation"
 >
 	<ul
-		class="flex w-full flex-col text-xl font-medium tracking-[0.01rem] sm:w-auto
-		sm:flex-row sm:justify-center sm:self-center sm:text-base"
+		class="flex w-full flex-col text-xl font-medium tracking-[0.01rem] sm:grid
+		sm:w-auto sm:grid-cols-3 sm:flex-row sm:justify-center sm:self-center sm:text-base md:flex"
 	>
 		{
 			navigation.map(({ title, link, links }) => (
