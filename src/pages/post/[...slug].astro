@@ -44,7 +44,7 @@ const { Content, headings, remarkPluginFrontmatter } = await post.render();
 	<div class="mt-8 text-justify">
 		<article class="w-full max-w-full">
 			<div
-				class="prose prose-lg md:prose-xl dark:prose-invert mb-12 min-w-full"
+				class="prose prose-lg mb-12 min-w-full md:prose-xl dark:prose-invert"
 			>
 				<Content />
 			</div>
@@ -54,9 +54,9 @@ const { Content, headings, remarkPluginFrontmatter } = await post.render();
 						post?.data?.images?.map((image) => {
 							const { width, height, src /*index , format*/ } = image;
 							const cssClassImage =
-								'transform rounded-lg object-cover transition-transform ' +
+								'transform rounded-lg object-contain transition-transform ' +
 								'duration-500 ease-[cubic-bezier(0.165,0.84,0.44,1)] ' +
-								'hover:scale-105 aspect-square max-xs:w-full';
+								'hover:scale-105 max-xs:w-full';
 
 							const sizesImage = `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px`;
 							return (
@@ -70,7 +70,6 @@ const { Content, headings, remarkPluginFrontmatter } = await post.render();
 										<Image
 											src={image}
 											width={200}
-											height={200}
 											format="webp"
 											quality={90}
 											widths={[240, 540, 720]}
