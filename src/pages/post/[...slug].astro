@@ -48,7 +48,9 @@ const { Content, headings, remarkPluginFrontmatter } = await post.render();
 			>
 				<Content />
 			</div>
-			<div class="gal mb-8 flex flex-wrap gap-5 max-xs:justify-center">
+			<div
+				class="gal mb-8 grid grid-cols-4 justify-between justify-items-center gap-3"
+			>
 				{
 					(post?.data?.images ?? [])?.length > 0 &&
 						post?.data?.images?.map((image) => {
@@ -69,7 +71,7 @@ const { Content, headings, remarkPluginFrontmatter } = await post.render();
 									>
 										<Image
 											src={image}
-											width={200}
+											width={175}
 											format="webp"
 											quality={90}
 											widths={[240, 540, 720]}
@@ -106,6 +108,45 @@ const { Content, headings, remarkPluginFrontmatter } = await post.render();
 		gallery: '.gal',
 		children: 'a',
 		pswpModule: () => import('photoswipe'),
+	});
+
+	lightbox.on('uiRegister', function () {
+		lightbox?.pswp?.ui?.registerElement({
+			name: 'download-button',
+			order: 8,
+			isButton: true,
+			tagName: 'a',
+
+			// SVG with outline
+			html: {
+				isCustomSVG: true,
+				inner:
+					'<path d="M20.5 14.3 17.1 18V10h-2.2v7.9l-3.4-3.6L10 16l6 6.1 6-6.1ZM23 23H9v2h14Z" id="pswp__icn-download"/>',
+				outlineID: 'pswp__icn-download',
+			},
+
+			// Or provide full svg:
+			// html: '<svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" class="pswp__icn"><path d="M20.5 14.3 17.1 18V10h-2.2v7.9l-3.4-3.6L10 16l6 6.1 6-6.1ZM23 23H9v2h14Z" /></svg>',
+
+			// Or provide any other markup:
+			// html: '<i class="fa-solid fa-download"></i>'
+
+			onInit: (element: HTMLElement, pswp) => {
+				const anchorElement = element as HTMLAnchorElement;
+
+				anchorElement.setAttribute('download', '');
+				anchorElement.setAttribute('target', '_blank');
+				anchorElement.setAttribute('rel', 'noopener');
+
+				pswp.on('change', () => {
+					const source = pswp?.currSlide?.data?.src;
+
+					if (typeof source === 'string') {
+						anchorElement.href = source;
+					}
+				});
+			},
+		});
 	});
 
 	lightbox.init();
