@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 // List of categories for blog posts
-export const CATEGORIES = ['Быть, а не казаться'] as const;
+export const CATEGORIES = ['Быть, а не казаться', 'Мотожизнь'] as const;
 
 const blog = defineCollection({
 	// Type-check frontmatter using a schema
