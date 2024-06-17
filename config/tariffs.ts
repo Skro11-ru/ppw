@@ -16,7 +16,7 @@ export const tariffs = [
 				included: true,
 			},
 			{
-				text: 'создание двух- трех образов',
+				text: 'создание двух-трех образов',
 				included: true,
 			},
 			{
@@ -124,7 +124,7 @@ export const tariffs = [
 				included: false,
 			},
 			{
-				text: 'создание одного образов',
+				text: 'создание одного образа',
 				included: true,
 			},
 			{
@@ -178,7 +178,7 @@ export const tariffs = [
 				included: false,
 			},
 			{
-				text: 'создание одного образов',
+				text: 'создание одного образа',
 				included: false,
 			},
 			{
