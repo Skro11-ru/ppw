@@ -6,6 +6,7 @@ const {
 	data: { title, description, pubDate, heroImage, category },
 	readTime,
 	slug,
+	id,
 } = Astro.props;
 ---
 
@@ -19,8 +20,14 @@ const {
 				height={heroImage.width}
 				format="webp"
 				loading="eager"
-				style="object-position: 10% 15%"
-				class="h-full min-w-full rounded-[2px] object-cover transition-all duration-200 hover:scale-[101%]"
+				class="h-full min-w-full rounded-[2px] object-cover object-[20%_40%] transition-all duration-200 hover:scale-[101%]"
+				class:list={[
+					{
+						'object-[50%_15%]': id === '1/1.md',
+						'object-[40%_50%]': id === '2/2.md',
+						'object-[50%_50%]': id === '3/3.md',
+					},
+				]}
 				alt={`img of ${title}`}
 			/>
 		</a>
