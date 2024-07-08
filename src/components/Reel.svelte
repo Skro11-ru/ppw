@@ -1,35 +1,42 @@
 <div class="slot-machine">
-	<h1>Генератор случайных чисел</h1>
-	<div class="group">
-		{#each array as i}
-			<div class="reel">
-				<div class="reel-holder">
-					{#each i as j}
-						<p>{j}</p>
-					{/each}
+	<h3 class="-title">Генератор случайных чисел</h3>
+	<div class="-container">
+		<div class="group">
+			{#each array as i}
+				<div class="reel">
+					<div class="reel-holder">
+						{#each i as j}
+							<p>{j}</p>
+						{/each}
+					</div>
+					<div class="reel-holder">
+						{#each i as j}
+							<p>{j}</p>
+						{/each}
+					</div>
+					<div class="reel-door bg-gray-50" class:--hidden={isDirty}>?</div>
 				</div>
-				<div class="reel-holder">
-					{#each i as j}
-						<p>{j}</p>
-					{/each}
-				</div>
-				<div class="reel-door bg-white" class:--hidden={isDirty}>?</div>
-			</div>
-		{/each}
+			{/each}
+		</div>
+		<button
+			on:click={action}
+			class:button-inactive={status === statusEnum.PROCESS}
+			class="button bg-accent"
+			class:--end={copied}
+			disabled={status === statusEnum.PROCESS}
+		>
+			{titleBtn}
+		</button>
 	</div>
-
-	<button
-		on:click={action}
-		class:button-inactive={status === statusEnum.PROCESS}
-		class="button bg-accent"
-		class:--end={status === statusEnum.END}
-		disabled={status === statusEnum.PROCESS}
-	>
-		{titleBtn}
-	</button>
 </div>
 
 <script lang="ts">
+	enum statusEnum {
+		START = 'START',
+		PROCESS = 'PROCESS',
+		END = 'END',
+	}
+
 	import { copyToClipboard } from '@utils/copyToClipboard.ts';
 
 	const COUNT = 4;
@@ -55,44 +62,30 @@
 		'9',
 		'0',
 	];
+
 	const array = Array(COUNT).fill(reel);
-	let start: number | undefined;
 
-	const tMax = 4000;
-	const height = 700;
-	let numberOutput: number[] = [];
-	let speeds: number[] = [];
-	const r = [];
-
-	enum statusEnum {
-		START = 'START',
-		PROCESS = 'PROCESS',
-		END = 'END',
-	}
 	let status: statusEnum = statusEnum.START;
+	let titleBtn = 'Сгенерировать';
+	let copied = false;
 
 	$: isDirty = status !== statusEnum.START;
 
-	let titleBtn: string;
-	$: {
+	const setStatus = (status: statusEnum) => {
 		switch (status) {
-			case statusEnum.START: {
-				titleBtn = 'Участвовать';
-				break;
-			}
 			case statusEnum.PROCESS: {
 				titleBtn = 'Генерирую...';
-				break;
+				return statusEnum.PROCESS;
 			}
 			case statusEnum.END: {
 				titleBtn = 'Копировать';
-				break;
+				return statusEnum.END;
 			}
 			default: {
-				titleBtn = 'Участвовать';
+				return statusEnum.START;
 			}
 		}
-	}
+	};
 
 	const randomNumber = (min: number, max: number) => {
 		const randomValue = crypto.getRandomValues(new Uint32Array(1))[0];
@@ -110,10 +103,17 @@
 
 	function action() {
 		if (status === statusEnum.END) {
-			copyToClipboard(sTarget);
-		}
-		status = statusEnum.PROCESS;
+			titleBtn = 'Скопировано';
+			copied = true;
 
+			copyToClipboard(sTarget);
+			setTimeout(() => {
+				titleBtn = 'Копировать';
+				copied = false;
+			}, 2000);
+			return;
+		}
+		status = setStatus(statusEnum.PROCESS);
 		const reelsElements = document.querySelectorAll('.reel');
 
 		reelsElements.forEach((i, index) => {
@@ -133,35 +133,38 @@
 				behavior: 'smooth',
 			});
 		});
-		status = statusEnum.END;
+
+		status = setStatus(statusEnum.END);
 	}
 </script>
 
 <style lang="scss">
 	.slot-machine {
 		width: 100%;
-		max-width: 650px;
+		max-width: 800px;
 		margin: 0 auto;
+
+		.-title {
+			font-size: 30px;
+			text-align: center;
+		}
+
+		.-container {
+			max-width: 430px;
+			margin: 0 auto;
+		}
 	}
 
 	.button {
 		display: block;
 		width: 100%;
-		padding: 2.2rem 0;
-
+		padding: 23px 20px;
 		color: #fff;
-		font-weight: 300;
-		font-size: 2.4rem;
-		line-height: 3.2rem;
+		font-size: 2rem;
 		text-align: center;
 		text-decoration: none;
-
 		border: none;
 		border-radius: 0.4rem;
-		box-shadow:
-			inset -0.1rem -0.1rem 0 0 #000,
-			inset 0.1rem 0.1rem 0.1rem 0 #f36aa8,
-			0.2rem 0.2rem 0.1rem rgb(0 0 59 / 60%);
 
 		&-inactive {
 			background-color: #88777b;
@@ -175,16 +178,13 @@
 
 		&:hover {
 			cursor: pointer;
-			opacity: 0.7;
+			opacity: 0.8;
 		}
 
 		&.--end {
 			color: #000;
-			background-color: #43ef09;
-			box-shadow:
-				inset -0.1rem -0.1rem 0 0 #000,
-				inset 0.1rem 0.1rem 0.1rem 0 #65f136,
-				0.2rem 0.2rem 0.1rem rgb(0 0 59 / 60%);
+			background-color: white;
+			transition: background-color 0.1s linear;
 		}
 	}
 
@@ -209,14 +209,13 @@
 		display: flex;
 		gap: 10px;
 		justify-content: space-between;
-		padding: 2rem 0;
+		padding: 1rem 0;
 		border-radius: 3rem;
 	}
 
 	.reel {
 		position: relative;
 		flex: 1;
-		//height: 10rem;
 		height: 100px;
 		overflow: hidden;
 		text-align: center;
@@ -228,7 +227,6 @@
 
 		.reel-holder {
 			position: relative;
-			//top: -4rem;
 			text-align: center;
 		}
 
@@ -252,14 +250,12 @@
 		}
 
 		:global(p) {
-			height: 6rem;
-			//margin-top: 1rem;
 			display: flex;
-			justify-content: center;
 			align-items: center;
+			justify-content: center;
+			height: 6rem;
 			margin-bottom: 0;
 			font-weight: 700;
-			//font-size: 4.8rem;
 			font-size: 48px;
 		}
 	}
