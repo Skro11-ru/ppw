@@ -19,6 +19,11 @@ import '../assets/styles/normalize/normalize.css';
 import '../assets/styles/index.scss';
 import '../assets/styles/tailwind.css';
 import Analytics from '../components/analytics/Analytics.astro';
+import SpinnerButton from '../components/SpinnerButton.astro';
+
+const targetDate = new Date('2024-07-15T23:59:00');
+
+let timeIsUp = Date.now() > targetDate.getTime();
 ---
 
 <!doctype html>
@@ -173,6 +178,14 @@ import Analytics from '../components/analytics/Analytics.astro';
 				}
 			</ul>
 			<slot />
+			{timeIsUp}
+			{
+				() => {
+					if (!timeIsUp) {
+						return <SpinnerButton link="/draw/" />;
+					}
+				}
+			}
 		</div>
 		<slot name="footer">
 			<Footer links={socialLink} />

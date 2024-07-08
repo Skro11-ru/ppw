@@ -1,0 +1,134 @@
+---
+const { link } = Astro.props;
+---
+
+<a href={link} class="spinner-button" style="bottom: calc(-40px + 15vh);">
+	<div class="is-relative">
+		<div class="spinner-button__icon">
+			<span class="icon">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="48"
+					height="48"
+					viewBox="0 0 36 36"
+				>
+					<rect width="36" height="36" fill="none"></rect>
+					<path
+						fill="currentColor"
+						d="M32 8h-7.3l-1.06-2.72A2 2 0 0 0 21.78 4h-7.56a2 2 0 0 0-1.87 1.28L11.3 8H4a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2m0 22H4V10h8.67l1.55-4h7.56l1.55 4H32Z"
+						class="clr-i-outline clr-i-outline-path-1"></path>
+					<path
+						fill="currentColor"
+						d="M9 19a9 9 0 1 0 9-9a9 9 0 0 0-9 9m16.4 0a7.4 7.4 0 1 1-7.4-7.4a7.41 7.41 0 0 1 7.4 7.4"
+						class="clr-i-outline clr-i-outline-path-2"></path>
+					<path
+						fill="currentColor"
+						d="M9.37 12.83a.8.8 0 0 0-.8-.8h-2.4a.8.8 0 0 0 0 1.6h2.4a.8.8 0 0 0 .8-.8"
+						class="clr-i-outline clr-i-outline-path-3"></path>
+					<path
+						fill="currentColor"
+						d="M12.34 19a5.57 5.57 0 0 0 3.24 5l.85-1.37a4 4 0 1 1 4.11-6.61l.86-1.38A5.56 5.56 0 0 0 12.34 19"
+						class="clr-i-outline clr-i-outline-path-4"></path>
+					<path fill="none" d="M0 0h36v36H0z"></path>
+				</svg>
+			</span>
+		</div>
+		<div class="spinner-button__text is-relative">
+			<svg viewBox="0 0 100 100" class="spinner-button__svg">
+				<path
+					d="M 0,50 a 50,50 0 1,1 0,1 z"
+					id="circle"
+					class="spinner-button__circle"></path>
+				<text>
+					<textPath xlink:href="#circle" fill="#fff">
+						<!--подобрать программу лечения-->
+						розыгрыш&nbsp;розыгрыш
+					</textPath>
+				</text>
+			</svg>
+		</div>
+	</div>
+</a>
+
+<style lang="scss">
+	$spinner-color: #f74808;
+	$spinner-color-other: #f74808;
+
+	.spinner-button {
+		position: fixed;
+		right: 80px;
+		bottom: 80px;
+		z-index: 39;
+
+		align-self: flex-end;
+		width: 120px;
+		height: 120px;
+
+		font-size: 14px;
+
+		transform: scale(0.9);
+		cursor: pointer;
+
+		&::before {
+			position: absolute;
+			top: -34px;
+			left: -34px;
+
+			display: block;
+			width: 190px;
+			height: 190px;
+
+			background: radial-gradient(
+				ellipse at center,
+				$spinner-color 0%,
+				$spinner-color-other 100%
+			);
+			border-radius: 100%;
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$spinner-color}', endColorstr='#{$spinner-color-other}',GradientType=1 );
+
+			content: '';
+		}
+
+		@media (width <= 768px) {
+			right: 20px;
+			bottom: 20px;
+			transform: scale(0.6);
+		}
+	}
+
+	.spinner-button__icon {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		color: #fff;
+		transform: translate(-50%, -50%);
+	}
+
+	.spinner-button__text {
+		font-size: 100%;
+		letter-spacing: 7.2px;
+		text-transform: uppercase;
+		pointer-events: none;
+	}
+
+	.spinner-button__svg {
+		display: block;
+		overflow: visible;
+		vertical-align: middle;
+		animation: turn 14s linear infinite;
+
+		&:hover {
+			animation-play-state: paused;
+		}
+	}
+
+	.spinner-button__circle {
+		fill: transparent;
+	}
+
+	@keyframes turn {
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+</style>
