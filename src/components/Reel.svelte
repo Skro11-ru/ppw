@@ -127,38 +127,13 @@
 				}
 			});
 
-			// i.scrollTo({
-			// 	top: curEl.offsetTop - 5,
-			// 	left: 0,
-			// 	behavior: 'smooth',
-			// });
-
-			//   =================
-			console.log(`########################## Reel ##### ${137}\n`, curEl);
-			// setTimeout(() => {
-			// 	curEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			// }, index * 1000);
-
-			// requestAnimationFrame(() => {
-			// 	curEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			// });
-
-			//   =================
-			//
-			//
-			//   =================
-			// Используйте requestAnimationFrame
 			requestAnimationFrame(() => {
-				console.log('offsetTop:', curEl.offsetTop);
-
 				i.scrollTo({
 					top: curEl.offsetTop - 5,
 					left: 0,
-					// behavior: 'smooth', // Попробуйте удалить behavior: 'smooth'
+					behavior: 'smooth',
 				});
 			});
-
-			//   =================
 		});
 
 		status = setStatus(statusEnum.END);
