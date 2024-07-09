@@ -90,7 +90,7 @@ export const tariffs = [
 				included: false,
 			},
 			{
-				text: '20 фотографий в авторской ретуши',
+				text: '20-30 фотографий в авторской ретуши',
 				included: true,
 			},
 			{
@@ -144,7 +144,7 @@ export const tariffs = [
 				included: false,
 			},
 			{
-				text: '10 фотографий в авторской ретуши',
+				text: '10-20 фотографий в авторской ретуши',
 				included: true,
 			},
 			{
@@ -198,7 +198,7 @@ export const tariffs = [
 				included: false,
 			},
 			{
-				text: '5-7 фотографий в авторской ретуши',
+				text: '7-10 фотографий в авторской ретуши',
 				included: true,
 			},
 			{
