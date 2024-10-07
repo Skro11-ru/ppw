@@ -26,7 +26,13 @@
 			(k.async = 1),
 			(k.src = r),
 			a.parentNode.insertBefore(k, a);
-	})(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+	})(
+		globalThis,
+		document,
+		'script',
+		'https://mc.yandex.ru/metrika/tag.js',
+		'ym',
+	);
 	// eslint-disable-next-line unicorn/numeric-separators-style
 	ym(97504896, 'init', {
 		clickmap: true,
@@ -52,7 +58,7 @@
 	src="https://www.googletagmanager.com/gtag/js?id=G-1D4M94F01H"
 	is:inline></script>
 <script is:inline>
-	window.dataLayer = window.dataLayer || [];
+	globalThis.dataLayer = globalThis.dataLayer || [];
 	function gtag() {
 		// eslint-disable-next-line prefer-rest-params
 		dataLayer.push(arguments);

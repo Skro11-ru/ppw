@@ -1,0 +1,89 @@
+---
+import { tariffs } from '../../config/tariffs';
+---
+
+<div class="flex flex-col gap-1">
+	{
+		tariffs.map((item) => (
+			<details class="">
+				<summary class="flex items-center justify-between px-5 py-2">
+					<div class="flex items-center justify-between gap-3">
+						<p>{item.title}</p>
+						<p>{item.price}</p>
+					</div>
+
+					<svg
+						class="-mr-1 h-4 w-4 fill-current opacity-75"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 20 20"
+					>
+						<path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z" />
+					</svg>
+				</summary>
+				<ul class="flex max-h-[220px] flex-col flex-wrap gap-x-10 px-5 py-2 max-lg:max-h-none max-lg:flex-nowrap max-sm:px-6">
+					{item.features.map((feature) => (
+						<li
+							class="flex items-center gap-1"
+							class:list={[{ 'opacity-20': !feature.included }]}
+						>
+							<span>{feature.text}</span>
+						</li>
+					))}
+				</ul>
+			</details>
+		))
+	}
+</div>
+
+<style lang="scss">
+	details {
+		overflow: hidden;
+		border: 1px solid #f74808;
+
+		/* background: #ffffff; */
+		/* color: #333333; */
+		border-radius: 3px;
+		user-select: none;
+
+		summary {
+			position: relative;
+			border-radius: 3px 3px 0 0;
+
+			cursor: pointer;
+
+			svg {
+				transform: rotate(90deg);
+				transition: all 0.3s;
+			}
+		}
+
+		&:not([open]) {
+			summary {
+				/* background: #f6f6f6; */
+				/* color: #454545; */
+			}
+		}
+
+		&[open] {
+			summary {
+				border-bottom: 1px solid #f74808;
+
+				svg {
+					transform: rotate(-90deg);
+				}
+			}
+		}
+	}
+
+	/* details:not([open]) summary:hover, */
+	/* details:not([open]) summary:focus { */
+	/*	background: #f6f6f6; */
+	/*	color: #454545; */
+	/* } */
+
+	/* details[open] summary { */
+	/*	//background: var(--accent); */
+	/*	//color: #ffffff; */
+
+	/* } */
+</style>
