@@ -26,16 +26,11 @@ const currentPath = Astro.url.pathname;
 </a>
 <nav
 	data-nav-links
-	class="text-default z-20 hidden w-full items-center
-	overflow-x-hidden overflow-y-visible uppercase max-sm:absolute max-sm:bottom-0
-	max-sm:left-0 max-sm:right-0 max-sm:top-[80px] max-sm:h-screen
-	max-sm:w-full max-sm:items-start max-sm:bg-page sm:flex sm:w-auto
-	sm:justify-self-center sm:overflow-x-auto sm:overflow-y-visible"
+	class="text-default z-20 hidden w-full items-center overflow-x-hidden overflow-y-visible uppercase max-sm:absolute max-sm:bottom-0 max-sm:left-0 max-sm:right-0 max-sm:top-[80px] max-sm:h-screen max-sm:w-full max-sm:items-start max-sm:bg-page sm:flex sm:w-auto sm:justify-self-center sm:overflow-x-auto sm:overflow-y-visible"
 	aria-label="Main navigation"
 >
 	<ul
-		class="flex w-full flex-col text-xl font-medium tracking-[0.01rem] sm:grid
-		sm:w-auto sm:grid-cols-3 sm:flex-row sm:justify-center sm:self-center sm:text-base md:flex"
+		class="flex w-full flex-col text-xl font-medium tracking-[0.01rem] sm:grid sm:w-auto sm:grid-cols-3 sm:flex-row sm:justify-center sm:self-center sm:text-base md:flex"
 	>
 		{
 			navigation.map(({ title, link, links }) => (
@@ -48,21 +43,22 @@ const currentPath = Astro.url.pathname;
 				>
 					{links?.length ? (
 						<>
-							<button
-								type="button"
-								class="flex items-center px-4 py-3 uppercase hover:text-accent
-								max-md:px-3 max-md:py-2 dark:hover:text-white"
+							<a
+								href={link}
+								class:list={[
+									'flex items-center px-4 py-3 uppercase hover:text-accent max-md:px-3 max-md:py-2 dark:hover:text-white',
+									{
+										'text-accent': link === currentPath,
+									},
+								]}
 							>
 								{title}{' '}
 								<Icon
 									name="mdi:chevron-down"
 									class="ml-0.5 hidden h-3.5 w-3.5 sm:inline rtl:ml-0 rtl:mr-0.5"
 								/>
-							</button>
-							<ul
-								class="dropdown-menu  rounded pl-4 font-medium text-inherit
-							bg-page sm:absolute sm:hidden  sm:min-w-[200px] sm:pl-0"
-							>
+							</a>
+							<ul class="dropdown-menu rounded pl-4 font-medium text-inherit bg-page sm:absolute sm:hidden sm:min-w-[200px] sm:pl-0">
 								{links.map(({ title: text2, link: href2 }) => (
 									<li>
 										<a
@@ -74,7 +70,7 @@ const currentPath = Astro.url.pathname;
 												'py-2',
 												'first:rounded-t last:rounded-b hover:text-accent',
 												{
-													'text-accent': link === currentPath,
+													'text-accent': href2 === currentPath,
 												},
 											]}
 											href={href2}
@@ -111,25 +107,18 @@ const currentPath = Astro.url.pathname;
 	aria-label="hamburger-menu"
 >
 	<div
-		class="relative flex h-[40px] w-[40px] transform items-center
-			justify-center rounded-full bg-accent
-			ring-opacity-30 transition-all duration-200 hover:ring-8 group-focus:ring-4"
+		class="relative flex h-[40px] w-[40px] transform items-center justify-center rounded-full bg-accent ring-opacity-30 transition-all duration-200 hover:ring-8 group-focus:ring-4"
 	>
 		<div
-			class="-container flex h-[20px] w-[20px] origin-center transform
-				flex-col justify-between transition-all duration-300"
+			class="-container flex h-[20px] w-[20px] origin-center transform flex-col justify-between transition-all duration-300"
 		>
 			<div
-				class="-first h-[2px] w-1/2 origin-right transform rounded bg-white
-					transition-all delay-75 duration-300 group-focus:h-[1px]
-					group-focus:-translate-y-[1px]"
+				class="-first h-[2px] w-1/2 origin-right transform rounded bg-white transition-all delay-75 duration-300 group-focus:h-[1px] group-focus:-translate-y-[1px]"
 			>
 			</div>
 			<div class="-second h-[1px] rounded bg-white"></div>
 			<div
-				class="-third h-[2px] w-1/2 origin-left transform self-end rounded
-					bg-white transition-all delay-75 duration-300 group-focus:h-[1px]
-					group-focus:translate-y-[1px]"
+				class="-third h-[2px] w-1/2 origin-left transform self-end rounded bg-white transition-all delay-75 duration-300 group-focus:h-[1px] group-focus:translate-y-[1px]"
 			>
 			</div>
 		</div>

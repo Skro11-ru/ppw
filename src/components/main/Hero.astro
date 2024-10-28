@@ -1,0 +1,212 @@
+---
+import { Image } from 'astro:assets';
+import self from '../../../public/photos/main/self.jpg';
+---
+
+<main class="grid-container">
+	<div class="left-column">
+		<Image
+			src={self}
+			alt="self photo"
+			width={600}
+			quality={80}
+			widths={[400, 768, 1024, 1920, self.width]}
+			sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, ${self.width}px"
+			loading="eager"
+			class="aspect-square -rotate-6 rounded-lg object-cover object-top shadow-2xl"
+		/>
+	</div>
+	<div class="top-right">
+		<h1 class="text-xl font-bold uppercase">Анастасия Сударчикова</h1>
+	</div>
+	<div class="middle-right">
+		<h2 class="text-4xl uppercase text-accent">
+			Профессиональный <span class="whitespace-nowrap">фотограф-портретист</span
+			>
+		</h2>
+	</div>
+	<div class="bottom-right">
+		<p>Я фотограф-портретист и знаю, как создать лучший портрет-шедевр!</p>
+		<p>
+			Еще во время обучения я поняла, что хочу фотографировать людей, и
+			осознала, что сфотографировать красивую, молодую, с макияжем модель может
+			любой, а вот красиво сфотографировать обычного человека — вот это
+			искусство!
+		</p>
+		<p>
+			Я вижу и чувствую людей, вглядываюсь в их поведение, жесты, ищу и
+			показываю эту индивидуальность через фотографию. Я также фотографирую
+			семейные портреты, но не рядом с елками или в одинаковых свитерах.
+		</p>
+
+		<p>
+			Я показываю реальную жизнь в семье, важность отца, приемлемость поколений,
+			поэтому на моих семейных портретах Вы не увидите замученных людей и
+			недовольного папу.
+		</p>
+
+		<!--TODO-->
+		<p>
+			Посмотреть мое <a
+				href="/gallery/"
+				target="_blank"
+				class="text-xl uppercase text-accent">портфолио</a
+			>
+		</p>
+
+		<p>
+			Творю волшебство без елок и прочей мишуры - делаю людей на фото стильными,
+			крутыми, счастливыми и красивыми!
+		</p>
+
+		<p>
+			Мои съемки все индивидуальны с учетом потребности Заказчика, поэтому я
+			отказалась от часовой оплаты и предлагаю следующие варианты фотосессий,
+			<a href="/tariffs" target="_blank" class="text-xl uppercase text-accent"
+				>стоимость</a
+			> которых можно посмотреть
+		</p>
+
+		<p>
+			Есть идея для сьемки? <a
+				href="https://t.me/nasti_f13/"
+				target="_blank"
+				class="text-xl uppercase text-accent">Напиши</a
+			> мне мы обсудим, и я скажу, что сделать для ее реализации.
+		</p>
+
+		<!--TODO-->
+		<!--<p>-->
+		<!--	Заказать фотосессию или обсудить подробности моих съемок (кликабельная-->
+		<!--	ссылка уводит на страницу с заказом на которой выбираешь вариант, способ-->
+		<!--	связи, и отправляешь)-->
+		<!--</p>-->
+	</div>
+</main>
+
+<style lang="scss">
+	.grid-container {
+		display: grid;
+		grid-template-rows: auto auto auto auto;
+		grid-template-columns: auto 2fr;
+		gap: 30px 50px;
+		margin-top: 20px;
+		text-align: justify;
+
+		text-wrap: balance;
+
+		@media (width < 768px) {
+			grid-template-rows: auto auto auto auto;
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.left-column {
+		position: relative;
+		grid-row: 1 / 4;
+		grid-column: 1 / 2;
+
+		width: 100%;
+		height: fit-content;
+		margin-top: 20px;
+
+		&::before {
+			position: absolute;
+			inset: 0;
+			display: block;
+			width: 100%;
+			height: 100%;
+			background-color: rgb(0 0 0 / 40%);
+			filter: blur(6px);
+			content: '';
+		}
+
+		@media (width < 1440px) {
+			grid-row: 1 / 4;
+		}
+
+		@media (width < 1024px) {
+			min-width: 350px;
+		}
+
+		@media (width < 768px) {
+			grid-row: 3 / 4;
+			grid-column: 1 / 2;
+			margin: 0 auto;
+			padding: 20px 0;
+		}
+
+		@media (width < 500px) {
+			min-width: auto;
+		}
+	}
+
+	.top-right {
+		grid-row: 1 / 2;
+		grid-column: 2 / 3;
+
+		@media (width < 1440px) {
+			grid-row: 1 / 2;
+		}
+
+		@media (width < 768px) {
+			grid-row: 1 / 2;
+			grid-column: 1 / 2;
+		}
+	}
+
+	.middle-right {
+		grid-row: 2 / 3;
+		grid-column: 2 / 3;
+
+		@media (width < 1440px) {
+			grid-row: 2 / 3;
+		}
+
+		@media (width < 900px) {
+			h2 {
+				font-size: 24px;
+				line-height: 26px;
+			}
+		}
+
+		@media (width < 768px) {
+			grid-row: 2 / 3;
+			grid-column: 1 / 2;
+
+			h2 {
+				font-size: 32px;
+			}
+		}
+
+		@media (width < 500px) {
+			h2 {
+				font-size: 24px;
+			}
+		}
+
+		@media (width < 375px) {
+			h2 {
+				font-size: 22px;
+			}
+		}
+	}
+
+	.bottom-right {
+		display: flex;
+		flex-direction: column;
+		grid-row: 3 / 4;
+		grid-column: 2 / 3;
+		gap: 10px;
+
+		@media (width < 1440px) {
+			grid-row: 5 / 6;
+			grid-column: 1 / 3;
+		}
+
+		@media (width < 768px) {
+			grid-row: 4 / 5;
+			grid-column: 1 / 2;
+		}
+	}
+</style>
