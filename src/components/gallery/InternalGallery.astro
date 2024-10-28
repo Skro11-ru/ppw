@@ -1,6 +1,7 @@
 ---
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
+// import { getAllImages } from '../../utils/getAllImages';
 
 interface ExtendedImageMetadata extends ImageMetadata {
 	index: number;
@@ -122,6 +123,9 @@ for (const [, value] of Object.entries(paths)) {
 
 	data.images = data.images.sort((a, b) => a.index - b.index);
 }
+
+// todo change get images to getAllImages
+// const data1 = getAllImages(gallery, Astro.url.pathname);
 
 const isDev = import.meta.env.MODE === 'development';
 ---

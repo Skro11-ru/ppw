@@ -1,92 +1,131 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import self from '../../public/photos/main/self.jpg';
+// import { Image } from 'astro:assets';
+// import self from '../../public/photos/main/self.jpg';
 import { config } from '../../config/config';
+import Hero from '../components/main/Hero.astro';
+// import EndlessTape from '../components/main/EndlessTape.astro';
 ---
 
-<Layout title={config.meta.title} width="full">
-	<main class="relative flex">
-		<Image
-			src={self}
-			alt="self photo"
-			width={self.width}
-			quality={80}
-			widths={[400, 768, 1024, 1920, self.width]}
-			sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, ${self.width}px"
-			loading="eager"
-			class="h-[calc(100vh-var(--nav-height))] object-cover object-top"
-		/>
+<Layout title={config.meta.title}>
+	<Hero />
+	<!--<EndlessTape />-->
+	<!--<section class="m-auto flex flex-col gap-4 py-16 text-justify">-->
+	<!--	&lt;!&ndash;=================&ndash;&gt;-->
+	<!--	<p>Я фотограф-портретист и знаю, как создать лучший портрет-шедевр!</p>-->
+	<!--	<p>-->
+	<!--		Еще во время обучения я поняла, что хочу фотографировать людей, и-->
+	<!--		осознала, что сфотографировать красивую, молодую, с макияжем модель может-->
+	<!--		любой, а вот красиво сфотографировать обычного человека — вот это-->
+	<!--		искусство!-->
+	<!--	</p>-->
+	<!--	<p>-->
+	<!--		Я вижу и чувствую людей, вглядываюсь в их поведение, жесты, ищу и-->
+	<!--		показываю эту индивидуальность через фотографию.-->
+	<!--	</p>-->
+	<!--	<p>-->
+	<!--		Я также фотографирую семейные портреты, но не рядом с елками или в-->
+	<!--		одинаковых свитерах.-->
+	<!--	</p>-->
 
-		<h1
-			class="absolute bottom-40 left-10 flex flex-col text-balance px-10 text-4xl uppercase text-white max-sm:left-0 max-sm:w-full max-sm:items-center max-sm:text-3xl max-xs:text-2xl"
-		>
-			<span class="">Раскроем</span>
-			<span
-				class="ml-20 text-6xl text-accent max-sm:ml-0 max-sm:text-5xl max-xs:text-4xl"
-				>твою</span
-			>
-			<span class="ml-32 max-sm:ml-0">индивидуальность?!</span>
-		</h1>
-	</main>
-	<section class="m-auto max-w-[980px] px-10 py-16 text-justify">
-		<p class="mb-4">
-			Добрый день! Меня зовут Анастасия я специализируюсь на портретах.
-		</p>
+	<!--	<p>-->
+	<!--		Я показываю реальную жизнь в семье, важность отца, приемлемость поколений,-->
+	<!--		поэтому на моих семейных портретах Вы не увидите замученных людей и-->
+	<!--		недовольного папу.-->
+	<!--	</p>-->
 
-		<p class="mb-4">
-			Я могу могу разрушить стереотип "мужчины не любят фотографироваться".
-		</p>
+	<!--	&lt;!&ndash;TODO&ndash;&gt;-->
+	<!--	<p>-->
+	<!--		Посмотреть мое <a-->
+	<!--			href="/gallery/other"-->
+	<!--			target="_blank"-->
+	<!--			class="text-xl uppercase text-accent">портфолио</a-->
+	<!--		>-->
+	<!--	</p>-->
 
-		<p class="mb-4">
-			Я стремлюсь создавать уникальные и запоминающиеся образы своих героев,
-			раскрывая их индивидуальность и подчеркивая лучшие черты.
-		</p>
+	<!--	<p>-->
+	<!--		Творю волшебство без елок и прочей мишуры - делаю людей на фото стильными,-->
+	<!--		крутыми, счастливыми и красивыми!-->
+	<!--	</p>-->
 
-		<p class="mb-4">
-			Моя работа — это больше, чем просто фотографирование, это искусство,
-			которое требует тонкого понимания психологии человека, умения работать с
-			людьми и находить к ним подход.
-		</p>
+	<!--	<p>-->
+	<!--		Мои съемки все индивидуальны с учетом потребности Заказчика, поэтому я-->
+	<!--		отказалась от часовой оплаты и предлагаю следующие варианты фотосессий,-->
+	<!--		<a href="/tariffs" target="_blank" class="text-xl uppercase text-accent"-->
+	<!--			>стоимость</a-->
+	<!--		> которых можно посмотреть-->
+	<!--	</p>-->
 
-		<p class="mb-4">
-			Фотографирую также для бизнеса и организаций, а также для журналов
-			<a
-				href="https://themost.online/"
-				target="_blank"
-				class="underline underline-offset-4 hover:text-accent"
-			>
-				Themost
-			</a> и
-			<a
-				href="https://dorogoe.tomsk.ru/"
-				target="_blank"
-				class="underline underline-offset-4 hover:text-accent"
-			>
-				Дорогое удовольствие
-			</a>.
-		</p>
+	<!--	<p>-->
+	<!--		Есть идея для сьемки? <a-->
+	<!--			href="https://t.me/nasti_f13/"-->
+	<!--			target="_blank"-->
+	<!--			class="text-xl uppercase text-accent">Напиши</a-->
+	<!--		> мне мы обсудим, и я скажу, что сделать для ее реализации.-->
+	<!--	</p>-->
 
-		<p class="mb-4">
-			Я стараюсь создать комфортную атмосферу во время съемки, на моей
-			фотосессии Вам позировать не придется, от Вас всего лишь требуется это
-			быть собой, а Вашу позу если нужно я немного поправлю для гармоничного
-			кадра.
-		</p>
+	<!--	&lt;!&ndash;TODO&ndash;&gt;-->
+	<!--	&lt;!&ndash;<p>&ndash;&gt;-->
+	<!--	&lt;!&ndash;	Заказать фотосессию или обсудить подробности моих съемок (кликабельная&ndash;&gt;-->
+	<!--	&lt;!&ndash;	ссылка уводит на страницу с заказом на которой выбираешь вариант, способ&ndash;&gt;-->
+	<!--	&lt;!&ndash;	связи, и отправляешь)&ndash;&gt;-->
+	<!--	&lt;!&ndash;</p>&ndash;&gt;-->
+	<!--	&lt;!&ndash;=================&ndash;&gt;-->
+	<!--	&lt;!&ndash;<p class="mb-4">&ndash;&gt;-->
+	<!--	&lt;!&ndash;	Добрый день! Меня зовут Анастасия я специализируюсь на портретах.&ndash;&gt;-->
+	<!--	&lt;!&ndash;</p>&ndash;&gt;-->
 
-		<p class="mb-4">
-			Я убеждена, что каждый человек красив и уникален по-своему.
-		</p>
+	<!--	&lt;!&ndash;<p class="mb-4">&ndash;&gt;-->
+	<!--	&lt;!&ndash;	Я могу могу разрушить стереотип "мужчины не любят фотографироваться".&ndash;&gt;-->
+	<!--	&lt;!&ndash;</p>&ndash;&gt;-->
 
-		<p class="mb-4">
-			Моя задача — показать эту красоту и индивидуальность через объектив
-			камеры.
-		</p>
+	<!--	&lt;!&ndash;<p class="mb-4">&ndash;&gt;-->
+	<!--	&lt;!&ndash;	Я стремлюсь создавать уникальные и запоминающиеся образы своих героев,&ndash;&gt;-->
+	<!--	&lt;!&ndash;	раскрывая их индивидуальность и подчеркивая лучшие черты.&ndash;&gt;-->
+	<!--	&lt;!&ndash;</p>&ndash;&gt;-->
 
-		<p class="">
-			Я не люблю наигранности и поэтому буду ловить моменты правды!
-		</p>
-	</section>
+	<!--	&lt;!&ndash;<p class="mb-4">&ndash;&gt;-->
+	<!--	&lt;!&ndash;	Моя работа — это больше, чем просто фотографирование, это искусство,&ndash;&gt;-->
+	<!--	&lt;!&ndash;	которое требует тонкого понимания психологии человека, умения работать с&ndash;&gt;-->
+	<!--	&lt;!&ndash;	людьми и находить к ним подход.&ndash;&gt;-->
+	<!--	&lt;!&ndash;</p>&ndash;&gt;-->
+
+	<!--	&lt;!&ndash;<p class="mb-4">&ndash;&gt;-->
+	<!--	&lt;!&ndash;	Фотографирую также для бизнеса и организаций, а также для журналов&ndash;&gt;-->
+	<!--	&lt;!&ndash;	<a&ndash;&gt;-->
+	<!--	&lt;!&ndash;		href="https://themost.online/"&ndash;&gt;-->
+	<!--	&lt;!&ndash;		target="_blank"&ndash;&gt;-->
+	<!--	&lt;!&ndash;		class="underline underline-offset-4 hover:text-accent"&ndash;&gt;-->
+	<!--	&lt;!&ndash;	>&ndash;&gt;-->
+	<!--	&lt;!&ndash;		Themost&ndash;&gt;-->
+	<!--	&lt;!&ndash;	</a> и&ndash;&gt;-->
+	<!--	&lt;!&ndash;	<a&ndash;&gt;-->
+	<!--	&lt;!&ndash;		href="https://dorogoe.tomsk.ru/"&ndash;&gt;-->
+	<!--	&lt;!&ndash;		target="_blank"&ndash;&gt;-->
+	<!--	&lt;!&ndash;		class="underline underline-offset-4 hover:text-accent"&ndash;&gt;-->
+	<!--	&lt;!&ndash;	>&ndash;&gt;-->
+	<!--	&lt;!&ndash;		Дорогое удовольствие&ndash;&gt;-->
+	<!--	&lt;!&ndash;	</a>.&ndash;&gt;-->
+	<!--	&lt;!&ndash;</p>&ndash;&gt;-->
+
+	<!--	&lt;!&ndash;<p class="mb-4">&ndash;&gt;-->
+	<!--	&lt;!&ndash;	Я стараюсь создать комфортную атмосферу во время съемки, на моей&ndash;&gt;-->
+	<!--	&lt;!&ndash;	фотосессии Вам позировать не придется, от Вас всего лишь требуется это&ndash;&gt;-->
+	<!--	&lt;!&ndash;	быть собой, а Вашу позу если нужно я немного поправлю для гармоничного&ndash;&gt;-->
+	<!--	&lt;!&ndash;	кадра.&ndash;&gt;-->
+	<!--	&lt;!&ndash;</p>&ndash;&gt;-->
+
+	<!--	&lt;!&ndash;<p class="mb-4">&ndash;&gt;-->
+	<!--	&lt;!&ndash;	Я убеждена, что каждый человек красив и уникален по-своему.&ndash;&gt;-->
+	<!--	&lt;!&ndash;</p>&ndash;&gt;-->
+
+	<!--	&lt;!&ndash;<p class="mb-4">&ndash;&gt;-->
+	<!--	&lt;!&ndash;	Моя задача — показать эту красоту и индивидуальность через объектив&ndash;&gt;-->
+	<!--	&lt;!&ndash;	камеры.&ndash;&gt;-->
+	<!--	&lt;!&ndash;</p>&ndash;&gt;-->
+
+	<!--	&lt;!&ndash;<p class="">&ndash;&gt;-->
+	<!--	&lt;!&ndash;	Я не люблю наигранности и поэтому буду ловить моменты правды!&ndash;&gt;-->
+	<!--	&lt;!&ndash;</p>&ndash;&gt;-->
+	<!--</section>-->
 </Layout>
-
-<style></style>

@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { navigation } from '../components/widgets/nav/navigation';
+
+const portfolioLinks = navigation.find((i) => i.id === 'gallery')?.links;
+const hasLinks =
+	portfolioLinks?.length !== undefined && portfolioLinks.length > 0;
+---
+
+<Layout title="Портфолио">
+	<ul class="flex flex-wrap justify-center gap-10">
+		{
+			hasLinks &&
+				portfolioLinks.map(({ title, link, poster }) => (
+					<li class="basis-1/4" class:list={[]}>
+						{
+							<a
+								class="relative inline-flex h-full w-full items-center border-[1px] border-transparent hover:border-accent"
+								href={link}
+							>
+								<img
+									class="h-full w-full object-cover"
+									src={poster?.images?.[0]?.src}
+								/>
+								<p class="absolute bottom-8 left-0 right-0 flex items-end justify-center bg-accent">
+									{title}
+								</p>
+							</a>
+						}
+					</li>
+				))
+		}
+	</ul>
+</Layout>

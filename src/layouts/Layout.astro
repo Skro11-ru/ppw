@@ -13,7 +13,6 @@ interface Props {
 }
 
 const { title, width } = Astro.props as Props;
-const currentPath = Astro.url.pathname;
 
 import '../assets/styles/normalize/normalize.css';
 import '../assets/styles/index.scss';
@@ -145,11 +144,7 @@ import Analytics from '../components/analytics/Analytics.astro';
 
 		<div
 			class="mx-auto w-full max-w-[1280px] flex-1"
-			class:list={[
-				{ '!max-w-full': width === 'full' },
-				{ 'px-6': currentPath !== '/' },
-				{ 'py-8': currentPath !== '/' },
-			]}
+			class:list={['px-6', 'py-8', { '!max-w-full': width === 'full' }]}
 		>
 			<ul
 				class="fixed right-8 top-[50%] z-40 flex -translate-y-1/2 transform flex-col gap-5 max-xs:hidden"
