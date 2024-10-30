@@ -1,7 +1,7 @@
 import { getAllImages } from '@utils/getAllImages.ts';
 
 const getPoster = async (
-	category: 'man' | 'woman' | 'business' | 'other' | 'moto',
+	category: 'man' | 'woman' | 'business' | 'family' | 'moto',
 ) => {
 	return await getAllImages(category);
 };
@@ -33,9 +33,9 @@ export const navigation = [
 				poster: await getPoster('woman'),
 			},
 			{
-				title: 'Разное',
-				link: '/gallery/other/',
-				poster: await getPoster('other'),
+				title: 'Семейный портрет',
+				link: '/gallery/family/',
+				poster: await getPoster('family'),
 			},
 			{
 				title: 'Moto life',

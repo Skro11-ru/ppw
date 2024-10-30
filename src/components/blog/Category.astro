@@ -14,9 +14,9 @@ const isActive =
 		? '/blog/'
 		: sluglify(`/category/${unsluglifyNameCategory}/1`)}
 	class:list={[
-		'whitespace-nowrap border-b-2 border-black  border-opacity-0 px-3 pb-2.5 font-medium text-gray-600 transition-colors duration-150 ease-linear first-letter:uppercase  hover:border-opacity-100 dark:border-white dark:border-opacity-0 dark:text-gray-300 dark:hover:border-white',
+		'whitespace-nowrap border-b-2 border-black border-opacity-0 px-3 pb-2.5 font-medium text-gray-600 transition-colors duration-150 ease-linear first-letter:uppercase hover:border-opacity-100 dark:border-white dark:border-opacity-0 dark:text-gray-300 dark:hover:border-white',
 		{
-			'z-10 border-b-2 border-black border-opacity-100  text-black dark:border-white dark:border-opacity-100 dark:text-white':
+			'z-10 border-b-2 border-black border-opacity-100 text-black dark:border-white dark:border-opacity-100 dark:text-white':
 				isActive,
 		},
 	]}

@@ -56,9 +56,7 @@ const { Content, headings, remarkPluginFrontmatter } = await post.render();
 						post?.data?.images?.map((image) => {
 							const { width, height, src /*index , format*/ } = image;
 							const cssClassImage =
-								'transform rounded-lg object-cover transition-transform ' +
-								'duration-500 ease-[cubic-bezier(0.165,0.84,0.44,1)] ' +
-								'hover:scale-105 max-xs:w-full h-full ';
+								'transform rounded-lg object-cover max-xs:w-full h-full';
 
 							const sizesImage = `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px`;
 							return (

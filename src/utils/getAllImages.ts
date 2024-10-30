@@ -4,7 +4,7 @@ interface ExtendedImageMetadata extends ImageMetadata {
 }
 
 export const getAllImages = async (
-	gallery: 'man' | 'woman' | 'business' | 'other' | 'moto',
+	gallery: 'man' | 'woman' | 'business' | 'family' | 'moto',
 	currentPath?: string | undefined,
 ) => {
 	let paths = {};
@@ -75,9 +75,9 @@ export const getAllImages = async (
 		};
 	}
 
-	if (gallery === 'other') {
+	if (gallery === 'family') {
 		paths = import.meta.glob<{ default: ExtendedImageMetadata }>(
-			'../../public/photos/gallery/other/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
+			'../../public/photos/gallery/family/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
 		);
 
 		data.setting = {

@@ -9,7 +9,7 @@ body {
 
 :root {
 	--nav-height: 80px;
-	--accent: 136, 58, 234;
+	--accent: #F74808;
 	--accent-light: 224, 204, 250;
 	--accent-dark: 49, 10, 101;
 	--accent-gradient: linear-gradient(
@@ -32,6 +32,20 @@ html {
   background: rgb(57 56 56 / 52%);
   -webkit-backdrop-filter: blur(13px) saturate(150%);
   backdrop-filter: blur(13px) saturate(150%);
+}
+
+a.--button{
+  display: inline-flex;
+  padding: 4px 6px 0;
+  color: var(--accent);
+  text-align: center;
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+
+  &:hover {
+    color: var(--white);
+    background: var(--accent);
+  }
 }
 
 
