@@ -1,0 +1,50 @@
+---
+interface Props {
+	class?: string;
+	href: string;
+	accent?: boolean;
+	text: string;
+	target?: '_blank' | '_self';
+	kind: 'button' | 'link';
+}
+
+const {
+	class: className,
+	kind,
+	href,
+	accent,
+	text,
+	target,
+} = Astro.props as Props;
+---
+
+<a
+	href={href}
+	target={target ?? '_blank'}
+	class={className}
+	class:list={[
+		className,
+		{
+			'--button': kind === 'button',
+			'text-accent': accent,
+		},
+	]}
+>
+	{text}
+</a>
+
+<style lang="scss">
+	.--button {
+		display: inline-flex;
+		padding: 4px 8px 0;
+		color: var(--accent);
+		text-align: center;
+		border: 1px solid var(--accent);
+		border-radius: 5px;
+
+		&:hover {
+			color: var(--white);
+			background: var(--accent);
+		}
+	}
+</style>

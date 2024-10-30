@@ -5,6 +5,7 @@ import { Image } from 'astro:assets';
 
 interface ExtendedImageMetadata extends ImageMetadata {
 	index: number;
+	colored: boolean;
 	// ...
 }
 
@@ -34,9 +35,9 @@ if (gallery === 'man') {
 	);
 
 	data.setting = {
-		horizontal: [1, 8, 18],
-		vertical: [2, 5, 10, 12, 15],
-		big: [0, 8, 16],
+		horizontal: [],
+		vertical: [],
+		big: [0, 5, 7, 9, 14, 16, 18, 23, 25, 27, 31, 33],
 	};
 }
 
@@ -46,9 +47,9 @@ if (gallery === 'woman') {
 	);
 
 	data.setting = {
-		horizontal: [0, 21],
-		vertical: [1, 7, 9, 10, 15],
-		big: [2, 5, 10, 17],
+		horizontal: [],
+		vertical: [],
+		big: [0, 5, 7, 9, 14, 16, 18, 23, 25, 27, 32, 34, 36, 41],
 	};
 }
 
@@ -58,9 +59,9 @@ if (gallery === 'business') {
 	);
 
 	data.setting = {
-		horizontal: [0],
-		vertical: [3, 6, 15],
-		big: [2, 5, 16],
+		horizontal: [],
+		vertical: [],
+		big: [0, 5, 7, 9, 14, 16, 18, 23],
 	};
 }
 
@@ -70,23 +71,21 @@ if (gallery === 'moto') {
 	);
 
 	data.setting = {
-		horizontal: [1, 4, 13, 14, 24, 25, 36, 43],
-		vertical: [
-			0, 2, 5, 8, 9, 12, 15, 16, 23, 29, 30, 31, 33, 35, 37, 39, 40, 41, 42,
-		],
-		big: [3, 7, 12, 13, 27, 34],
+		horizontal: [],
+		vertical: [],
+		big: [0, 5, 7, 9, 14, 16, 18, 23, 25, 27, 32, 34, 36, 41, 43, 45],
 	};
 }
 
-if (gallery === 'other') {
+if (gallery === 'family') {
 	paths = import.meta.glob<{ default: ExtendedImageMetadata }>(
-		'../../../public/photos/gallery/other/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
+		'../../../public/photos/gallery/family/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}',
 	);
 
 	data.setting = {
-		horizontal: [9, 17],
-		vertical: [0, 4, 5, 11, 12, 13, 14, 15],
-		big: [1, 7, 10],
+		horizontal: [],
+		vertical: [],
+		big: [0, 5, 7, 9, 14, 16, 18, 23],
 	};
 }
 
@@ -109,16 +108,19 @@ for (const [, value] of Object.entries(paths)) {
 	const resolve: { default: ExtendedImageMetadata } = await (
 		value as () => Promise<{ default: ExtendedImageMetadata }>
 	)();
-	const index: string | undefined = resolve.default.src
-		?.split('/')
-		?.at(-1)
-		?.split('.')?.[0];
+	const index = resolve.default.src?.split('/')?.at(-1)?.split('.')?.at(0);
 
 	const img = resolve.default;
+	const colored = index !== undefined && index.includes('c');
 
 	if (index !== undefined) {
-		img['index'] = Number(index);
+		img['index'] = Number(index.replaceAll(/[a-zA-Z]/g, ''));
 	}
+
+	if (colored) {
+		img['colored'] = true;
+	}
+
 	data.images.push(img);
 
 	data.images = data.images.sort((a, b) => a.index - b.index);
@@ -132,19 +134,18 @@ const isDev = import.meta.env.MODE === 'development';
 
 {
 	data.images.map((item, index_) => {
-		const { width, height, src /*index , format*/ } = item;
-		const cssClassImage =
-			'h-full w-full transform rounded-lg object-cover transition-transform ' +
-			'duration-500 ease-[cubic-bezier(0.165,0.84,0.44,1)] hover:scale-105';
-		const sizesImage = `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px`;
+		const { width, height, src, colored /*index , format*/ } = item;
+
 		return (
 			<a
-				class="relative overflow-hidden grayscale hover:grayscale-0"
+				class="relative overflow-hidden"
 				style={`order: ${index_}`}
 				class:list={[
+					'v-stretch',
 					{ 'v-stretch': data.setting.vertical.includes(index_) },
 					{ 'h-stretch': data.setting.horizontal.includes(index_) },
 					{ 'big-stretch': data.setting.big.includes(index_) },
+					{ 'hover:grayscale': colored },
 				]}
 				href={src}
 				data-pswp-width={width}
@@ -156,11 +157,10 @@ const isDev = import.meta.env.MODE === 'development';
 					alt="photo"
 					width={width}
 					quality={90}
-					widths={[240, 540, 720]}
-					sizes={sizesImage}
+					widths={[480, 768]}
 					decoding="async"
 					loading="lazy"
-					class={cssClassImage}
+					class="h-full w-full rounded-lg object-cover"
 				/>
 
 				{() => {

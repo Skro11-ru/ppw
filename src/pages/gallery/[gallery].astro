@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import InternalGallery from '../../components/gallery/InternalGallery.astro';
 
 export function getStaticPaths() {
-	let galleries = ['man', 'business', 'woman', 'other', 'moto'];
+	let galleries = ['man', 'business', 'woman', 'family', 'moto'];
 	return galleries.map((gallery) => {
 		return {
 			params: {
