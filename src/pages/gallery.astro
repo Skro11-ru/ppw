@@ -1,27 +1,62 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { navigation } from '../components/widgets/nav/navigation';
+import { Image } from 'astro:assets';
+import family from '/public/photos/gallery/family/1c.jpeg';
+import man from '/public/photos/gallery/man/1.jpeg';
+import woman from '/public/photos/gallery/woman/24.jpg';
+import business from '/public/photos/gallery/business/19c.jpeg';
+import moto from '/public/photos/gallery/moto/8.jpeg';
 
 const portfolioLinks = navigation.find((i) => i.id === 'gallery')?.links;
 const hasLinks =
 	portfolioLinks?.length !== undefined && portfolioLinks.length > 0;
+
+const getPhoto = (link: string) => {
+	const checkCategory = (category: string) =>
+		link.split('/').includes(category);
+
+	if (checkCategory('man')) {
+		return man;
+	}
+	if (checkCategory('woman')) {
+		return woman;
+	}
+	if (checkCategory('business')) {
+		return business;
+	}
+	if (checkCategory('family')) {
+		return family;
+	}
+	if (checkCategory('moto')) {
+		return moto;
+	}
+};
 ---
 
 <Layout title="Портфолио">
 	<ul class="flex flex-wrap justify-center gap-10">
 		{
 			hasLinks &&
-				portfolioLinks.map(({ title, link, poster }) => (
+				portfolioLinks.map(({ title, link }, index) => (
 					<li class="basis-1/4 max-sm:basis-auto" class:list={[]}>
 						{
 							<a
 								class="relative inline-flex h-full w-full items-center border-[1px] border-transparent hover:border-accent"
 								href={link}
 							>
-								<img
+								<Image
+									src={getPhoto(link)}
+									alt="photo"
+									width={306}
+									quality={100}
+									widths={[480, 768]}
+									decoding="async"
+									loading="lazy"
 									class="h-full w-full object-cover"
-									src={poster?.images?.[0]?.src}
+									style={`object-position: ${index === 0 ? '71%' : 'center'}`}
 								/>
+
 								<p class="absolute bottom-8 left-0 right-0 flex items-end justify-center bg-accent">
 									{title}
 								</p>

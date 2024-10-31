@@ -49,16 +49,13 @@ const { Content, headings, remarkPluginFrontmatter } = await post.render();
 				<Content />
 			</div>
 			<div
-				class="gal mb-8 grid grid-cols-4 justify-between justify-items-center gap-3"
+				class="gal mb-8 grid grid-cols-4 justify-between justify-items-center gap-[7px]"
 			>
 				{
 					(post?.data?.images ?? [])?.length > 0 &&
 						post?.data?.images?.map((image) => {
 							const { width, height, src /*index , format*/ } = image;
-							const cssClassImage =
-								'transform rounded-lg object-cover max-xs:w-full h-full';
 
-							const sizesImage = `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px`;
 							return (
 								<>
 									<a
@@ -69,15 +66,14 @@ const { Content, headings, remarkPluginFrontmatter } = await post.render();
 									>
 										<Image
 											src={image}
-											width={175}
+											width={188}
 											format="webp"
 											quality={90}
 											widths={[240, 540, 720]}
-											sizes={sizesImage}
 											decoding="async"
 											loading="lazy"
 											style="object-position: 10% 15%"
-											class={cssClassImage}
+											class="h-full transform object-cover max-xs:w-full"
 											alt={`img of ${'title'}`}
 										/>
 									</a>
