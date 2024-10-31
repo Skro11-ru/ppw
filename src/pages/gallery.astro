@@ -7,13 +7,14 @@ import man from '/public/photos/gallery/man/1.jpeg';
 import woman from '/public/photos/gallery/woman/24.jpg';
 import business from '/public/photos/gallery/business/19c.jpeg';
 import moto from '/public/photos/gallery/moto/8.jpeg';
+import type { ImageMetadata } from 'astro';
 
 const portfolioLinks = navigation.find((i) => i.id === 'gallery')?.links;
 const hasLinks =
 	portfolioLinks?.length !== undefined && portfolioLinks.length > 0;
 
-const getPhoto = (link: string) => {
-	const checkCategory = (category: string) =>
+const getPhoto = (link: string): ImageMetadata => {
+	const checkCategory = (category: string): boolean =>
 		link.split('/').includes(category);
 
 	if (checkCategory('man')) {
@@ -31,6 +32,7 @@ const getPhoto = (link: string) => {
 	if (checkCategory('moto')) {
 		return moto;
 	}
+	return man;
 };
 ---
 
